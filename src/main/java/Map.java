@@ -9,18 +9,20 @@ import Path.DataObjects.Graph;
 
 public class Map {
     private int size;
-    private char[][] map = new char[size][size];
+    private char[][] map;
 
     public Map(){}
 
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){
             size = s;
+            map = new char[size][size];
             generate();
             return true;
         }
         else if(player >= 5 && player <= 8 && s >= 8){
             size = s;
+            map = new char[size][size];
             generate();
             return true;
         }
@@ -28,8 +30,8 @@ public class Map {
     }
 
     public void generate(){
-        int xrand = (int)(Math.random()*size + 1);
-        int yrand = (int)(Math.random()*size + 1);
+        int xrand = (int)(Math.random()*size);
+        int yrand = (int)(Math.random()*size);
         map[xrand][yrand] = 'T';
         int randomValue;
         for(int i = 0; i < size; i++){

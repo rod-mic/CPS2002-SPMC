@@ -7,7 +7,7 @@ import static junit.framework.TestCase.assertEquals;
  * Created by thoma on 07/04/2017.
  */
 public class MapTest {
-    Map m;
+    Map m = new Map();
 
     @org.junit.Test
     public void setMap_2player_goodSize(){

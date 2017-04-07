@@ -10,7 +10,7 @@ public class Map {
     private int size;
     private char[][] map = new char[size][size];
 
-    public Map(){}
+    public Map(int size){this.size = size;}
 
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){

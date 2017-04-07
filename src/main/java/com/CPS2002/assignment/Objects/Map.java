@@ -3,6 +3,8 @@ package com.CPS2002.assignment.Objects;
 import com.CPS2002.assignment.Path.Algorithm.BreathFirst;
 import com.CPS2002.assignment.Path.DataObjects.Graph;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by rodemic on 07/04/2017.
  */
@@ -44,14 +46,14 @@ public class Map {
     }
 
     private void generate(){
-        int xrand = (int)(Math.random()*(size-1));
-        int yrand = (int)(Math.random()*(size-1));
+        int xrand = ThreadLocalRandom.current().nextInt(0,size);
+        int yrand = ThreadLocalRandom.current().nextInt(0,size);
         map[xrand][yrand] = 'T';
         treasurePos = new Position(xrand,yrand);
         int randomValue;
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
-                randomValue = (int)(Math.random()*6);
+                randomValue = ThreadLocalRandom.current().nextInt(1,5);
                 if(map[i][j] != 'T'){
                     if(randomValue == 5) map[i][j] = 'W';
                     else map[i][j] = 'G';

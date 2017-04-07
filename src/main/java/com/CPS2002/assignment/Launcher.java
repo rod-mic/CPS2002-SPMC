@@ -2,7 +2,9 @@ package com.CPS2002.assignment;
 
 
 import com.CPS2002.assignment.Exceptions.SizeException;
+import com.CPS2002.assignment.Objects.Game;
 import com.CPS2002.assignment.Objects.Map;
+import com.CPS2002.assignment.Objects.Player;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -15,7 +17,10 @@ public class Launcher {
         boolean check = false;
         int numPlayer = 0;
         int mapSize;
+
+        Player[] players;
         Map map = new Map();
+        Game game;
         Scanner sc = new Scanner(System.in).useDelimiter("\n");;
 
         System.out.println("Welcome to the game!");
@@ -34,6 +39,7 @@ public class Launcher {
                 check = false;
             }
         }check = false;
+        players = new Player[numPlayer];
 
         if(numPlayer < 5) System.out.println("How big  will the map be? (Between 5x5 and 50x50)");
         else System.out.println("How big  will the map be? (Between 8x8 and 50x50)");
@@ -56,8 +62,10 @@ public class Launcher {
         }
 
         for(int i = 0; i < numPlayer; i++){
-
+            players[i] = new Player(map);
         }
-    }
 
+        game = new Game(players,map);
+        game.generateHTMLFiles();
+    }
 }

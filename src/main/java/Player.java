@@ -12,7 +12,7 @@ public class Player {
     Position position;
     Position startPosition;
 
-    Player(Map map){
+    public Player(Map map){
         int size = map.getMapSize();
         boolean check = false;
         int x = 0;
@@ -29,7 +29,7 @@ public class Player {
         position = startPosition;
     }
 
-    void move(char direction, Map map) throws InvalidDirectionException, InvalidPositionException, WaterTileHitException {
+    public void move(char direction, Map map) throws InvalidDirectionException, InvalidPositionException, WaterTileHitException {
         int x = position.getX();
         int y = position.getY();
         boolean check;
@@ -74,7 +74,7 @@ public class Player {
         return check;
     }
 
-    boolean checkPosition(Position p, Map map) {
+    public boolean checkPosition(Position p, Map map) {
         int size = map.getMapSize();
         int x = p.getX();
         int y = p.getY();

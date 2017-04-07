@@ -4,10 +4,10 @@ package main.java;
  * Created by rodemic on 07/04/2017.
  */
 public class Position {
-    int x;
-    int y;
+    private int x;
+    private int y;
 
-    Position(int x, int y){
+    public Position(int x, int y){
         this.x = x;
         this.y = y;
     }

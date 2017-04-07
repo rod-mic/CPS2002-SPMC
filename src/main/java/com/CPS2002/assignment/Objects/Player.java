@@ -1,16 +1,16 @@
-package main.java;
+package com.CPS2002.assignment.Objects;
 
-import main.exceptions.InvalidDirectionException;
-import main.exceptions.InvalidPositionException;
-import main.exceptions.WaterTileHitException;
+import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
+import com.CPS2002.assignment.Exceptions.InvalidPositionException;
+import com.CPS2002.assignment.Exceptions.WaterTileHitException;
 
 /**
  * Created by rodemic on 07/04/2017.
  */
 public class Player {
 
-    Position position;
-    Position startPosition;
+    private Position position;
+    private Position startPosition;
 
     public Player(Map map){
         int size = map.getMapSize();
@@ -19,9 +19,10 @@ public class Player {
         int y = 0;
 
         while(!check) {
-            x = (int) Math.random() * size;
-            y = (int) Math.random() * size;
-            if (map.getTileType(new Position(x,y)) != 'G') check = false;
+            x = (int) (Math.random() * (size));
+            y = (int) (Math.random() * (size));
+            Position pos = new Position(x,y);
+            if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
             else check = true;
         }
 
@@ -79,7 +80,10 @@ public class Player {
         int x = p.getX();
         int y = p.getY();
 
-        return !(x < 0 || x > size || y < 0 || y > size);
+        if(x < 0 || y < 0)return false;
+        else if (x >= size || y >= size) return false;
+        else return true;
+        //return !(x < 0 || x > size || y < 0 || y > size);
     }
 
     private void moveToStart() {

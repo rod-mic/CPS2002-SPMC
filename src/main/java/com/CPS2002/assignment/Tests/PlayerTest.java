@@ -1,10 +1,11 @@
-package main.Tests;
+package com.CPS2002.assignment.Tests;
 
-import main.exceptions.InvalidDirectionException;
-import main.exceptions.InvalidPositionException;
-import main.java.Map;
-import main.java.Player;
-import main.java.Position;
+
+import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
+import com.CPS2002.assignment.Exceptions.InvalidPositionException;
+import com.CPS2002.assignment.Objects.Map;
+import com.CPS2002.assignment.Objects.Player;
+import com.CPS2002.assignment.Objects.Position;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -12,8 +13,8 @@ import static junit.framework.TestCase.assertEquals;
  * Created by rodemic on 07/04/2017.
  */
 public class PlayerTest {
-    Player p;
-    Map map = new Map();
+    private Player p;
+    private Map map = new Map();
 
     @org.junit.Before
     public void Before(){

@@ -1,10 +1,8 @@
-package Path.DataObjects;
-
+package com.CPS2002.assignment.Path.DataObjects;
 /**
  * Created by Thomas on 21/03/2017.
  */
 
-import java.util.Set;
 import java.util.Vector;
 
 public class Node {
@@ -15,7 +13,7 @@ public class Node {
     private Vector<Node> parentNodes;
     private Vector<Node> childNodes;
 
-    public Node(){};
+    Node(){}
 
     public Node(String name){
         this.name = name;
@@ -32,22 +30,22 @@ public class Node {
         start = true;
         name = "*";
     }
-    public void setTreasureTile(){
+    private void setTreasureTile(){
         treasureTile = true;
         name = "X";
     }
 
-    public void setWaterTile(){
+    private void setWaterTile(){
         waterTile = true;
         name = "!";
     }
 
-    public void addChildNode(Node n){
+    void addChildNode(Node n){
         childNodes.add(n);
         n.addParentNodes(this);
     }
 
-    public void addParentNodes(Node n){
+    private void addParentNodes(Node n){
         parentNodes.add(n);
     }
 
@@ -65,13 +63,13 @@ public class Node {
 
     public boolean isWaterTile() { return waterTile; }
 
-    public boolean isTreasureTile() { return treasureTile; }
+    boolean isTreasureTile() { return treasureTile; }
 
     public Vector<Node> getChildNodes(){
         return childNodes;
     }
 
-    public String getChildNames(){
+    private String getChildNames(){
         String result = "[ ";
         for(int i = 0; i < childNodes.size(); i++){
             result += childNodes.elementAt(i).getName() + " ";
@@ -95,7 +93,7 @@ public class Node {
         return name + "->" + getChildNames();
     }
 
-    public void setValues(char tile){
+    void setValues(char tile){
         if(tile == 'W') setWaterTile();
         else if(tile == 'T') setTreasureTile();
     }

@@ -1,8 +1,8 @@
-package Path.Algorithm;
+package com.CPS2002.assignment.Path.Algorithm;
 
-import Path.DataObjects.*;
+import com.CPS2002.assignment.Path.DataObjects.Graph;
+import com.CPS2002.assignment.Path.DataObjects.Node;
 
-import java.util.NoSuchElementException;
 import java.util.Vector;
 
 /**
@@ -61,7 +61,6 @@ public class BreathFirst extends Algorithm{
         levels.add(start);
         path = getPath(start, path, checked,levels,0);
         path = reverseVector(path);
-        if(path.lastElement() == goal) return true;
-        else return false;
+        return (path.lastElement() == goal);
     }
 }

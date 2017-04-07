@@ -1,4 +1,4 @@
-package main.exceptions;
+package com.CPS2002.assignment.Exceptions;
 
 /**
  * Created by rodemic on 07/04/2017.

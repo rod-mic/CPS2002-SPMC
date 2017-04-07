@@ -1,11 +1,12 @@
-package Path.DataObjects;
+package com.CPS2002.assignment.Path.DataObjects;
 
 /**
  * Created by thoma on 07/04/2017.
  */
 
-import java.util.*;
-import main.java.*;
+import com.CPS2002.assignment.Objects.Position;
+
+import java.util.Vector;
 
 public class Graph {
     private Vector<Node> listOfNodes;
@@ -32,7 +33,7 @@ public class Graph {
         return new Node();
     }
 
-    public void setNodes(Position position, Node n) {
+    private void setNodes(Position position, Node n) {
         if (listOfNodes.contains(n)) {
             if (position.getX() > 0 && position.getY() > 0) {
                 Node n1 = new Node();

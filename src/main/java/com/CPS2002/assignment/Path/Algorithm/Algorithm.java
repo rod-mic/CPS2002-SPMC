@@ -1,6 +1,8 @@
-package Path.Algorithm;
+package com.CPS2002.assignment.Path.Algorithm;
 
-import Path.DataObjects.*;
+import com.CPS2002.assignment.Path.DataObjects.Graph;
+import com.CPS2002.assignment.Path.DataObjects.Node;
+
 import java.util.Vector;
 
 /**
@@ -10,7 +12,7 @@ public class Algorithm {
     Node rootNode;
     Node goal;
 
-    public Algorithm(Graph g){
+    Algorithm(Graph g){
         rootNode = g.getRootNode();
         goal = g.getGoalNode();
     }

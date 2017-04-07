@@ -1,4 +1,4 @@
-package main.java;
+package com.CPS2002.assignment.Objects;
 
 /**
  * Created by rodemic on 07/04/2017.
@@ -7,7 +7,7 @@ package main.java;
 public class Game {
     int turn;
     Player[] players;
-    Map map;
+    private Map map;
 
     public Game(){
     }

@@ -1,7 +1,7 @@
-package main.java;
+package com.CPS2002.assignment.Objects;
 
-import Path.Algorithm.BreathFirst;
-import Path.DataObjects.Graph;
+import com.CPS2002.assignment.Path.Algorithm.BreathFirst;
+import com.CPS2002.assignment.Path.DataObjects.Graph;
 
 /**
  * Created by rodemic on 07/04/2017.
@@ -32,7 +32,7 @@ public class Map {
         else return false;
     }
 
-    public void generate(){
+    private void generate(){
         int xrand = (int)(Math.random()*(size-1));
         int yrand = (int)(Math.random()*(size-1));
         map[xrand][yrand] = 'T';
@@ -40,7 +40,6 @@ public class Map {
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 randomValue = (int)(Math.random()*6);
-                System.out.println(randomValue);
                 if(map[i][j] != 'T'){
                     if(randomValue == 5) map[i][j] = 'W';
                     else map[i][j] = 'G';
@@ -49,17 +48,17 @@ public class Map {
         }
     }
 
-    public int getMapSize(){ return size; }
+    int getMapSize(){ return size; }
 
-    public char getTileType(Position position){ return map[position.getX()][position.getY()];}
+    char getTileType(Position position){ return map[position.getX()][position.getY()];}
 
-    public boolean checkPath(Position position){
+    boolean checkPath(Position position){
         Graph g = new Graph(map,position);
         BreathFirst b = new BreathFirst(g);
         return b.checkPath();
     }
 
-    public void initMap(int size){
+    private void initMap(int size){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 map[i][j] = ' ';

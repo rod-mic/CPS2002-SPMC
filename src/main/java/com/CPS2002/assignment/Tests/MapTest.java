@@ -1,13 +1,15 @@
-package main.Tests;
+package com.CPS2002.assignment.Tests;
 
-import main.java.Map;
+
+import com.CPS2002.assignment.Objects.Map;
+
 import static junit.framework.TestCase.assertEquals;
 
 /**
  * Created by thoma on 07/04/2017.
  */
 public class MapTest {
-    Map m = new Map();
+    private Map m = new Map();
 
     @org.junit.Test
     public void setMap_2player_goodSize(){

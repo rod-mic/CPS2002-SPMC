@@ -23,25 +23,41 @@ public class PlayerTest {
     @org.junit.Test
     public void moveUp() throws Exception, InvalidPositionException {
         p = new Player(map);
-        p.move('U',map);
+        try{
+            p.move('U',map);
+        }catch(InvalidPositionException ex){
+            System.out.println(ex);
+        }
     }
 
     @org.junit.Test
     public void moveDown() throws Exception, InvalidPositionException {
         p = new Player(map);
-        p.move('D',map);
+        try{
+            p.move('D',map);
+        }catch(InvalidPositionException ex){
+            System.out.println(ex);
+        }
     }
 
     @org.junit.Test
     public void moveLeft() throws Exception, InvalidPositionException {
         p = new Player(map);
-        p.move('L',map);
+        try{
+            p.move('L',map);
+        }catch(InvalidPositionException ex){
+            System.out.println(ex);
+        }
     }
 
     @org.junit.Test
     public void moveRight() throws Exception, InvalidPositionException {
         p = new Player(map);
-        p.move('R',map);
+        try {
+            p.move('R', map);
+        }catch(InvalidPositionException ex){
+            System.out.println(ex);
+        }
     }
 
     @org.junit.Test(expected = InvalidDirectionException.class)
@@ -58,8 +74,6 @@ public class PlayerTest {
 
     @org.junit.Test
     public void checkPositionX_Max() throws Exception {
-        //TODO
-        map = new Map();
         Position position = new Position(0,0);
         assertEquals(false,p.checkPosition(position,map));
     }
@@ -72,8 +86,6 @@ public class PlayerTest {
 
     @org.junit.Test
     public void checkPositionY_Max() throws Exception {
-        //TODO
-        map = new Map();
         Position position = new Position(0,0);
         assertEquals(false,p.checkPosition(position,map));
     }

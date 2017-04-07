@@ -2,6 +2,8 @@ package com.CPS2002.assignment.Tests;
 
 
 import com.CPS2002.assignment.Objects.Map;
+import com.CPS2002.assignment.Objects.Position;
+import junit.framework.Assert;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -39,5 +41,11 @@ public class MapTest {
     @org.junit.Test
     public void setMap_above_Max_Player(){
         assertEquals(false, m.setMapSize(8,9));
+    }
+
+    @org.junit.Test
+    public void get_map_size(){
+        m.setMapSize(5,4);
+        assertEquals(5,m.getMapSize());
     }
 }

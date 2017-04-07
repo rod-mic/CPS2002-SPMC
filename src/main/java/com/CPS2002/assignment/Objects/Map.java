@@ -66,9 +66,9 @@ public class Map {
         }
     }
 
-    int getMapSize(){ return size; }
+    public int getMapSize(){ return size; }
 
-    char getTileType(Position position){ return map[position.getX()][position.getY()];}
+    public char getTileType(Position position){ return map[position.getX()][position.getY()];}
 
     private void initMap(int size){
         for(int i = 0; i < size; i++){

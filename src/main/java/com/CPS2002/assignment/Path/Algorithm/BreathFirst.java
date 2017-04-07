@@ -61,6 +61,8 @@ public class BreathFirst extends Algorithm{
         levels.add(start);
         path = getPath(start, path, checked,levels,0);
         path = reverseVector(path);
-        return (path.lastElement() == goal);
+        System.out.println(path.size());
+        if(path.lastElement() == goal) return true;
+        else return false;
     }
 }

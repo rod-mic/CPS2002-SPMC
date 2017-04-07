@@ -98,8 +98,10 @@ public class Map {
     }
 
     boolean checkPath(Position position){
-        Graph g = new Graph(map,position,treasurePos);
+        Graph g = new Graph(this,position,treasurePos);
         BreathFirst b = new BreathFirst(g);
         return b.checkPath();
     }
+
+    public char[][] getMap(){ return map; }
 }

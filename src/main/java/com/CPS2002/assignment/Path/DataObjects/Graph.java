@@ -4,6 +4,7 @@ package com.CPS2002.assignment.Path.DataObjects;
  * Created by thoma on 07/04/2017.
  */
 
+import com.CPS2002.assignment.Objects.Map;
 import com.CPS2002.assignment.Objects.Position;
 
 import java.util.Vector;
@@ -14,19 +15,24 @@ public class Graph {
     private Node rootNode;
     private Node goal;
 
-    public Graph(char[][] map, Position position, Position treasure) {
-        this.map = map;
+    public Graph(Map m, Position position, Position treasure) {
+        this.map = m.getMap();
         listOfNodes = new Vector<>();
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map.length; j++){
-                Node n = new Node(new Position(i,j),map[i][j]);
-                listOfNodes.add(n);
+                if(map[i][j] != 'W') {
+                    Node n = new Node(new Position(i, j), map[i][j]);
+                    if (position.getX() == i && position.getY() == j) {
+                        rootNode = n;
+                        rootNode.setStart();
+                    }
+                    listOfNodes.add(n);
+                }
             }
         }
-
-        rootNode = new Node(position,map[position.getX()][position.getY()]);
-        rootNode.setStart();
-        listOfNodes.add(rootNode);
+        m.outputMap();
+        System.out.println("\n\n");
+        goThroughGraph();
 
         goal = new Node(treasure,map[treasure.getX()][treasure.getY()]);
 
@@ -37,6 +43,9 @@ public class Graph {
         checked.add(rootNode);
 
         setNodes(start, checked);
+        m.outputMap();
+        System.out.println("\n\n");
+        goThroughGraph();
     }
 
     public Node getRootNode() {
@@ -50,9 +59,6 @@ public class Graph {
         for (int i = 0; i < currentLevel.size(); i++) {
             Node n = currentLevel.elementAt(i);
             Position position = n.getPosition();
-
-            System.out.println("Entered new level");
-            System.out.println(position.getX()+" : "+position.getY());
 
             if (position.getX() - 1 >= 0) {
                 Node n1 = getNodeByPosition(new Position(position.getX()-1,position.getY()));
@@ -82,7 +88,6 @@ public class Graph {
                 }
             }
             if (position.getY() + 1 < map.length) {
-                System.out.println("Checking: "+position.getX()+","+(position.getY()+1));
                 Node n4 = getNodeByPosition(new Position(position.getX(),position.getY()+1));
                 if (!checked.contains(n4) && !n4.isWaterTile()) {
                     n.addChildNode(n4);
@@ -92,7 +97,7 @@ public class Graph {
                 }
             }
         }
-        setNodes(nextLevel,checked);
+        if(nextLevel.size() != 0) setNodes(nextLevel,checked);
     }
 
     public Node getNodeByPosition(Position p){
@@ -100,7 +105,7 @@ public class Graph {
         boolean check = true;
         for(int i = 0; i < listOfNodes.size() && check; i++){
             Position p2 = listOfNodes.elementAt(i).getPosition();
-            if(p2.getX() == p.getX() && p2.getY() == p2.getY()){
+            if(p2.getX() == p.getX() && p2.getY() == p.getY()){
                 n = listOfNodes.elementAt(i);
                 check = false;
             }
@@ -112,5 +117,15 @@ public class Graph {
         for(int i = 0; i < listOfNodes.size(); i++){
             System.out.println("x: "+listOfNodes.elementAt(i).getPosition().getX()+" | y: "+listOfNodes.elementAt(i).getPosition().getY());
         }
+    }
+
+    public void goThroughGraph(){
+        for(int i = 0; i < listOfNodes.size(); i++){
+            Position p = listOfNodes.elementAt(i).getPosition();
+            if(listOfNodes.elementAt(i).getStart()) System.out.print("Start: ");
+            System.out.println(p.getX()+","+p.getY()+" -> " + listOfNodes.elementAt(i).showChildPos());
+        }
+
+        System.out.println("\n\n\n\n");
     }
 }

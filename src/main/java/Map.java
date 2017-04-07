@@ -1,5 +1,7 @@
 package main.java;
 
+import Path.*;
+
 /**
  * Created by rodemic on 07/04/2017.
  */
@@ -8,9 +10,7 @@ public class Map {
     private int size;
     private char[][] map = new char[size][size];
 
-    public Map(int s){
-        size = s;
-    }
+    public Map(){}
 
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){
@@ -42,6 +42,11 @@ public class Map {
 
     public int getMapSize(){ return size; }
 
-    public char getTileType(int x, int y){ return map[x][y];}
+    public char getTileType(Position position){ return map[position.getX()][position.getY()];}
+
+    public boolean checkPath(Position position){
+       // Graph g = new Graph(map,position);
+        return true;
+    }
 
 }

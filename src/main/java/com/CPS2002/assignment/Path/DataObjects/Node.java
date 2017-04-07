@@ -5,20 +5,20 @@ package com.CPS2002.assignment.Path.DataObjects;
 
 import com.CPS2002.assignment.Objects.Position;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Node {
     private boolean start = false;
     private boolean waterTile = false;
     private boolean treasureTile = false;
     private Node parent;
-    private Vector<Node> childNodes;
+    private ArrayList<Node> childNodes;
     private Position p;
 
     public Node(){}
 
     public Node(Position p, char tile){
-        childNodes = new Vector<>();
+        childNodes = new ArrayList<>();
         this.p = p;
         setValues(tile);
     }
@@ -59,7 +59,7 @@ public class Node {
 
     public Position getPosition(){ return p; }
 
-    public Vector<Node> getChildNodes(){
+    public ArrayList<Node> getChildNodes(){
         return childNodes;
     }
 
@@ -71,7 +71,7 @@ public class Node {
     public String showChildPos(){
         String result = "";
         for(int i = 0; i < childNodes.size(); i++){
-            result += childNodes.elementAt(i).getPosition().getX() + "," + childNodes.elementAt(i).getPosition().getY() + "|";
+            result += childNodes.get(i).getPosition().getX() + "," + childNodes.get(i).getPosition().getY() + "|";
         }
         return result;
     }

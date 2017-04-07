@@ -3,6 +3,7 @@ package com.CPS2002.assignment.Path.Algorithm;
 import com.CPS2002.assignment.Path.DataObjects.Graph;
 import com.CPS2002.assignment.Path.DataObjects.Node;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
@@ -18,10 +19,10 @@ public class BreathFirst extends Algorithm{
     public Vector<Node> getPath(Vector<Node> currentLevel, Vector<Node> path, Vector<Node> checked, Vector<Vector<Node>> pastLevels, int depth){
         Vector<Node> nextLevel = new Vector<>();
         for(int i = 0; i < currentLevel.size(); i++){
-            Vector<Node> childs = currentLevel.elementAt(i).getChildNodes();
+            ArrayList<Node> childs = currentLevel.get(i).getChildNodes();
             for(int j = 0; j < childs.size(); j++){
-                if(childs.elementAt(j).isTreasureTile()){
-                    path.add(childs.elementAt(j));
+                if(childs.get(j).isTreasureTile()){
+                    path.add(childs.get(j));
                     path.add(currentLevel.elementAt(i));
                     Node checkParent = currentLevel.elementAt(i);
                     for(int k = depth; k > 0; k--){
@@ -34,9 +35,9 @@ public class BreathFirst extends Algorithm{
                     }
                     return path;
                 }
-                else if(checked.contains(childs.elementAt(j))) continue;
-                nextLevel.add(childs.elementAt(j));
-                checked.add(childs.elementAt(j));
+                else if(checked.contains(childs.get(j))) continue;
+                nextLevel.add(childs.get(j));
+                checked.add(childs.get(j));
             }
         }
         pastLevels.add(nextLevel);

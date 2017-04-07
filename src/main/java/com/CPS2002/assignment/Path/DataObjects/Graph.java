@@ -7,17 +7,18 @@ package com.CPS2002.assignment.Path.DataObjects;
 import com.CPS2002.assignment.Objects.Map;
 import com.CPS2002.assignment.Objects.Position;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Graph {
     private char[][] map;
-    private Vector<Node> listOfNodes;
+    private ArrayList<Node> listOfNodes;
     private Node rootNode;
     private Node goal;
 
     public Graph(Map m, Position position, Position treasure) {
         this.map = m.getMap();
-        listOfNodes = new Vector<>();
+        listOfNodes = new ArrayList<>();
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map.length; j++){
                 Node n = new Node(new Position(i, j), map[i][j]);
@@ -96,9 +97,9 @@ public class Graph {
         Node n = new Node();
         boolean check = true;
         for(int i = 0; i < listOfNodes.size() && check; i++){
-            Position p2 = listOfNodes.elementAt(i).getPosition();
+            Position p2 = listOfNodes.get(i).getPosition();
             if(p2.getX() == p.getX() && p2.getY() == p.getY()){
-                n = listOfNodes.elementAt(i);
+                n = listOfNodes.get(i);
                 check = false;
             }
         }
@@ -107,15 +108,15 @@ public class Graph {
 
     public void showPositions(){
         for(int i = 0; i < listOfNodes.size(); i++){
-            System.out.println("x: "+listOfNodes.elementAt(i).getPosition().getX()+" | y: "+listOfNodes.elementAt(i).getPosition().getY());
+            System.out.println("x: "+listOfNodes.get(i).getPosition().getX()+" | y: "+listOfNodes.get(i).getPosition().getY());
         }
     }
 
     public void goThroughGraph(){
         for(int i = 0; i < listOfNodes.size(); i++){
-            Position p = listOfNodes.elementAt(i).getPosition();
-            if(listOfNodes.elementAt(i).getStart()) System.out.print("Start: ");
-            System.out.println(p.getX()+","+p.getY()+" -> " + listOfNodes.elementAt(i).showChildPos());
+            Position p = listOfNodes.get(i).getPosition();
+            if(listOfNodes.get(i).getStart()) System.out.print("Start: ");
+            System.out.println(p.getX()+","+p.getY()+" -> " + listOfNodes.get(i).showChildPos());
         }
 
         System.out.println("\n\n\n\n");

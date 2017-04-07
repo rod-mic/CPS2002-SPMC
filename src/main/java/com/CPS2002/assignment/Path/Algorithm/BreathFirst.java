@@ -3,6 +3,7 @@ package com.CPS2002.assignment.Path.Algorithm;
 import com.CPS2002.assignment.Path.DataObjects.Graph;
 import com.CPS2002.assignment.Path.DataObjects.Node;
 
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
 /**
@@ -61,8 +62,11 @@ public class BreathFirst extends Algorithm{
         levels.add(start);
         path = getPath(start, path, checked,levels,0);
         path = reverseVector(path);
-        System.out.println(path.size());
-        if(path.lastElement().isTreasureTile()) return true;
-        else return false;
+        try{
+            if(path.lastElement().isTreasureTile()) return true;
+            else return false;
+        }catch(NoSuchElementException e){
+            return false;
+        }
     }
 }

@@ -29,6 +29,7 @@ public class Map {
             boolean check = true;
             while(check){
                 generate();
+                outputMap();
                 if(checkAnyPaths()) check = false;
             }
             return true;
@@ -40,6 +41,7 @@ public class Map {
             boolean check = true;
             while(check){
                 generate();
+                outputMap();
                 if(checkAnyPaths()) check = false;
             }
             return true;

@@ -38,9 +38,6 @@ public class Graph {
         checked.add(rootNode);
 
         setNodes(start, checked);
-        m.outputMap();
-        System.out.println("\n\n");
-        goThroughGraph();
     }
 
     public Node getRootNode() {

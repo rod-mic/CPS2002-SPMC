@@ -61,7 +61,7 @@ public class Player {
                     throw new InvalidPositionException("The player has hit the upper wall");
             }
         }
-        else if(map.getTileType(position.getX(),position.getY()) == 'W'){
+        else if(map.getTileType(position) == 'W'){
             moveToStart();
             throw new WaterTileHitException();
         }

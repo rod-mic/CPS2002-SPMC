@@ -20,19 +20,14 @@ public class Graph {
         listOfNodes = new Vector<>();
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map.length; j++){
-                if(map[i][j] != 'W') {
-                    Node n = new Node(new Position(i, j), map[i][j]);
-                    if (position.getX() == i && position.getY() == j) {
-                        rootNode = n;
-                        rootNode.setStart();
-                    }
-                    listOfNodes.add(n);
+                Node n = new Node(new Position(i, j), map[i][j]);
+                if (position.getX() == i && position.getY() == j) {
+                    rootNode = n;
+                    rootNode.setStart();
                 }
+                listOfNodes.add(n);
             }
         }
-        m.outputMap();
-        System.out.println("\n\n");
-        goThroughGraph();
 
         goal = new Node(treasure,map[treasure.getX()][treasure.getY()]);
 

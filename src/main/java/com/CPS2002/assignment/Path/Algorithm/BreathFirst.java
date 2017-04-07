@@ -19,13 +19,13 @@ public class BreathFirst extends Algorithm{
         for(int i = 0; i < currentLevel.size(); i++){
             Vector<Node> childs = currentLevel.elementAt(i).getChildNodes();
             for(int j = 0; j < childs.size(); j++){
-                if(goal == childs.elementAt(j)){
+                if(childs.elementAt(j).isTreasureTile()){
                     path.add(childs.elementAt(j));
                     path.add(currentLevel.elementAt(i));
                     Node checkParent = currentLevel.elementAt(i);
                     for(int k = depth; k > 0; k--){
                         for(int l = 0; l < pastLevels.elementAt(k-1).size(); l++){
-                            if(checkParent.getParent() == pastLevels.elementAt(k-1).elementAt(l)) {
+                            if(checkParent.getParent().equals(pastLevels.elementAt(k-1).elementAt(l))) {
                                 path.add(pastLevels.elementAt(k-1).elementAt(l));
                                 checkParent = pastLevels.elementAt(k-1).elementAt(l);
                             }
@@ -62,7 +62,7 @@ public class BreathFirst extends Algorithm{
         path = getPath(start, path, checked,levels,0);
         path = reverseVector(path);
         System.out.println(path.size());
-        if(path.lastElement() == goal) return true;
+        if(path.lastElement().isTreasureTile()) return true;
         else return false;
     }
 }

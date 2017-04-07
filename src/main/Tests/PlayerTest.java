@@ -13,30 +13,40 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class PlayerTest {
     Player p;
-    Map map;
+    Map map = new Map();
+
+    @org.junit.Before
+    public void Before(){
+        map.setMapSize(5,4);
+    }
 
     @org.junit.Test
     public void moveUp() throws Exception, InvalidPositionException {
+        p = new Player(map);
         p.move('U',map);
     }
 
     @org.junit.Test
     public void moveDown() throws Exception, InvalidPositionException {
+        p = new Player(map);
         p.move('D',map);
     }
 
     @org.junit.Test
     public void moveLeft() throws Exception, InvalidPositionException {
+        p = new Player(map);
         p.move('L',map);
     }
 
     @org.junit.Test
     public void moveRight() throws Exception, InvalidPositionException {
+        p = new Player(map);
         p.move('R',map);
     }
 
     @org.junit.Test(expected = InvalidDirectionException.class)
     public void moveInvalidDirection() throws Exception, InvalidPositionException {
+        p = new Player(map);
         p.move('T',map);
     }
 

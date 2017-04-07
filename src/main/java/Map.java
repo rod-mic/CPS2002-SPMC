@@ -1,6 +1,7 @@
 package main.java;
 
-import Path.*;
+import Path.Algorithm.BreathFirst;
+import Path.DataObjects.Graph;
 
 /**
  * Created by rodemic on 07/04/2017.
@@ -10,15 +11,17 @@ public class Map {
     private int size;
     private char[][] map = new char[size][size];
 
-    public Map(int size){this.size = size;}
+    public Map(){}
 
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){
             size = s;
+            generate();
             return true;
         }
         else if(player >= 5 && player <= 8 && s >= 8){
             size = s;
+            generate();
             return true;
         }
         else return false;
@@ -45,7 +48,8 @@ public class Map {
     public char getTileType(Position position){ return map[position.getX()][position.getY()];}
 
     public boolean checkPath(Position position){
-       // Graph g = new Graph(map,position);
-        return true;
+        Graph g = new Graph(map,position);
+        BreathFirst b = new BreathFirst(g);
+        return b.checkPath();
     }
 }

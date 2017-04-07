@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class Graph {
-    private char[][] map;
-    private ArrayList<Node> listOfNodes;
+    final private char[][] map;
+    final private ArrayList<Node> listOfNodes;
     private Node rootNode;
-    private Node goal;
+    final private Node goal;
 
     public Graph(Map m, Position position, Position treasure) {
         this.map = m.getMap();
@@ -45,7 +45,7 @@ public class Graph {
         return rootNode;
     }
 
-    public Node getGoalNode() { return goal; }
+    //public Node getGoalNode() { return goal; }
 
     private void setNodes(Vector<Node> currentLevel, Vector<Node> checked) {
         Vector<Node> nextLevel = new Vector<>();
@@ -93,7 +93,7 @@ public class Graph {
         if(nextLevel.size() != 0) setNodes(nextLevel,checked);
     }
 
-    public Node getNodeByPosition(Position p){
+    private Node getNodeByPosition(Position p){
         Node n = new Node();
         boolean check = true;
         for(int i = 0; i < listOfNodes.size() && check; i++){
@@ -106,7 +106,7 @@ public class Graph {
         return n;
     }
 
-    public void showPositions(){
+    /*public void showPositions(){
         for(int i = 0; i < listOfNodes.size(); i++){
             System.out.println("x: "+listOfNodes.get(i).getPosition().getX()+" | y: "+listOfNodes.get(i).getPosition().getY());
         }
@@ -120,5 +120,5 @@ public class Graph {
         }
 
         System.out.println("\n\n\n\n");
-    }
+    }*/
 }

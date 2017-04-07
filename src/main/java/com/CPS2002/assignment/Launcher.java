@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Created by rodemic on 07/04/2017.
  */
-public class Launcher {
+class Launcher {
     public static void main(String[] args){
         boolean check = false;
         int numPlayer = 0;
@@ -21,7 +21,7 @@ public class Launcher {
         Player[] players;
         Map map = new Map();
         Game game;
-        Scanner sc = new Scanner(System.in).useDelimiter("\n");;
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println("Welcome to the game!");
         System.out.println("How many users will be playing? (2-8 Players)");

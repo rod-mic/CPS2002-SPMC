@@ -13,7 +13,7 @@ public class Player {
 
     private Position position;
     private Position startPosition;
-    private ArrayList<Position> previousPositions = new ArrayList<Position>();
+    final private ArrayList<Position> previousPositions = new ArrayList<>();
 
     public Player(Map map){
         int size = map.getMapSize();
@@ -35,7 +35,7 @@ public class Player {
         }
     }
 
-    void addPosition(Position p){
+    private void addPosition(Position p){
         previousPositions.add(p);
     }
 
@@ -43,7 +43,7 @@ public class Player {
         return previousPositions;
     }
 
-    public void move(char direction) {
+    void move(char direction) {
         int x = position.getX();
         int y = position.getY();
         Position pos = null;
@@ -68,11 +68,7 @@ public class Player {
         addPosition(pos);
     }
 
-    private void setPosition(Position p){
-        position = p;
-    }
-
-    public void checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException{
+    void checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException{
         int x = position.getX();
         int y = position.getY();
         switch(direction) {
@@ -104,14 +100,19 @@ public class Player {
         return (x >= 0 && x < size && y >= 0 && y < size);
     }
 
-    public Position getStartPosition(){
+    Position getStartPosition(){
         return startPosition;
     }
-    protected void moveToStart() {
+
+    void moveToStart() {
         position = startPosition;
     }
 
-    public Position getPosition() {
+    Position getPosition() {
         return position;
+    }
+
+    private void setPosition(Position p){
+        position = p;
     }
 }

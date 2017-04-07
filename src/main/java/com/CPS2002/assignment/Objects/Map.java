@@ -17,10 +17,6 @@ public class Map {
     public Map(){
     }
 
-    public Map(int size){
-        this.size = size;
-    }
-
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){
             size = s;
@@ -49,7 +45,7 @@ public class Map {
         else return false;
     }
 
-    public void generate(){
+    private void generate(){
         int xrand = ThreadLocalRandom.current().nextInt(0,size);
         int yrand = ThreadLocalRandom.current().nextInt(0,size);
         map[xrand][yrand] = 'T';
@@ -68,7 +64,7 @@ public class Map {
 
     public int getMapSize(){ return size; }
 
-    public char getTileType(Position position){ return map[position.getX()][position.getY()];}
+    char getTileType(Position position){ return map[position.getX()][position.getY()];}
 
     private void initMap(int size){
         for(int i = 0; i < size; i++){
@@ -78,7 +74,7 @@ public class Map {
         }
     }
 
-    public void outputMap(){
+    private void outputMap(){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 System.out.print(map[i][j]+" ");
@@ -87,7 +83,7 @@ public class Map {
         }
     }
 
-    public boolean checkAnyPaths(){
+    private boolean checkAnyPaths(){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 if(map[i][j] == 'G'){

@@ -15,35 +15,32 @@ public class Node {
     private ArrayList<Node> childNodes;
     private Position p;
 
-    public Node(){}
+    Node(){}
 
-    public Node(Position p, char tile){
+    Node(Position p, char tile){
         childNodes = new ArrayList<>();
         this.p = p;
         setValues(tile);
     }
 
-    public void setStart(){
+    void setStart(){
         start = true;
     }
 
-    public void setTreasureTile(){
+    private void setTreasureTile(){
         treasureTile = true;
     }
 
-    public void setWaterTile(){
+    private void setWaterTile(){
         waterTile = true;
     }
 
-    public void setPosition(Position p){
-        this.p = p;
-    }
 
-    public void setParent(Node n){
+    void setParent(Node n){
         parent = n;
     }
 
-    public void addChildNode(Node n){
+    void addChildNode(Node n){
         childNodes.add(n);
     }
 
@@ -51,29 +48,19 @@ public class Node {
         return parent;
     }
 
-    public boolean getStart(){ return start; }
 
-    public boolean isWaterTile() { return waterTile; }
+    boolean isWaterTile() { return waterTile; }
 
     public boolean isTreasureTile() { return treasureTile; }
 
-    public Position getPosition(){ return p; }
+    Position getPosition(){ return p; }
 
     public ArrayList<Node> getChildNodes(){
         return childNodes;
     }
 
-    void setValues(char tile){
+    private void setValues(char tile){
         if(tile == 'W') setWaterTile();
         else if(tile == 'T') setTreasureTile();
     }
-
-    public String showChildPos(){
-        String result = "";
-        for(int i = 0; i < childNodes.size(); i++){
-            result += childNodes.get(i).getPosition().getX() + "," + childNodes.get(i).getPosition().getY() + "|";
-        }
-        return result;
-    }
-
 }

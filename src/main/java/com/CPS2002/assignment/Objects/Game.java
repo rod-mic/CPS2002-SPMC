@@ -15,10 +15,10 @@ import static java.lang.System.exit;
  * Created by rodemic on 07/04/2017.
  */
 public class Game {
-    int turn;
-    Player[] players;
-    private Map map;
-    Scanner sc = new Scanner(System.in);
+    private int turn;
+    final private Player[] players;
+    final private Map map;
+    final private Scanner sc = new Scanner(System.in);
 
     public Game(Player[] players, Map map){
         turn = 0;
@@ -30,8 +30,9 @@ public class Game {
         boolean check;
         boolean checkWin = false;
         char[] direction = new char[players.length];
-        ArrayList<Integer> winners = new ArrayList<Integer>();
+        ArrayList<Integer> winners = new ArrayList<>();
         while(!checkWin) {
+            turn++;
             for (int i = 0; i < players.length; i++) {
                 System.out.print("Direction to move Player " + i + ": ");
                 check = false;
@@ -65,10 +66,19 @@ public class Game {
         if(winners.size() == 1)System.out.println("Player "+winners.get(0)+ " found the Treasure!");
         else {
             String print = "Players ";
-            for(int i = 0;i<winners.size();i++){
-                print += Integer.toString(winners.get(i));
+            for (Integer winner : winners) {
+                print += Integer.toString(winner);
             }
             System.out.println(print+ " found the Treasure!");
+        }
+        for(int i = 0;i<players.length;i++){
+            Path playerPath = Paths.get("player_html/map_player_"+ Integer.toString(i) + ".html");
+            try {
+                Files.delete(playerPath);
+            } catch (Exception e) {
+                System.out.println("Error while deleting map_player_"+Integer.toString(i)+ ".html. Exiting Program");
+                exit(1);
+            }
         }
     }
 
@@ -115,9 +125,5 @@ public class Game {
             }
 
         }
-    }
-
-    Map getMap(){
-        return map;
     }
 }

@@ -10,6 +10,7 @@ import com.CPS2002.assignment.Path.DataObjects.Graph;
 public class Map {
     private int size;
     private char[][] map;
+    private Position treasurePos;
 
     public Map(){
     }
@@ -19,14 +20,24 @@ public class Map {
             size = s;
             map = new char[size][size];
             initMap(size);
-            generate();
+            boolean check = true;
+            while(check){
+                generate();
+                outputMap();
+                if(checkAnyPaths()) check = false;
+            }
             return true;
         }
         else if(player >= 5 && player <= 8 && s >= 8){
             size = s;
             map = new char[size][size];
             initMap(size);
-            generate();
+            boolean check = true;
+            while(check){
+                generate();
+                outputMap();
+                if(checkAnyPaths()) check = false;
+            }
             return true;
         }
         else return false;
@@ -36,6 +47,7 @@ public class Map {
         int xrand = (int)(Math.random()*(size-1));
         int yrand = (int)(Math.random()*(size-1));
         map[xrand][yrand] = 'T';
+        treasurePos = new Position(xrand,yrand);
         int randomValue;
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
@@ -52,17 +64,38 @@ public class Map {
 
     char getTileType(Position position){ return map[position.getX()][position.getY()];}
 
-    boolean checkPath(Position position){
-        Graph g = new Graph(map,position);
-        BreathFirst b = new BreathFirst(g);
-        return b.checkPath();
-    }
-
     private void initMap(int size){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 map[i][j] = ' ';
             }
         }
+    }
+
+    public void outputMap(){
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                System.out.print(map[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    public boolean checkAnyPaths(){
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(map[i][j] == 'G'){
+                    Position p = new Position(i,j);
+                    if(checkPath(p)) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    boolean checkPath(Position position){
+        Graph g = new Graph(map,position,treasurePos);
+        BreathFirst b = new BreathFirst(g);
+        return b.checkPath();
     }
 }

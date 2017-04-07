@@ -3,41 +3,47 @@ package com.CPS2002.assignment.Path.DataObjects;
  * Created by Thomas on 21/03/2017.
  */
 
+import com.CPS2002.assignment.Objects.Position;
+
 import java.util.Vector;
 
 public class Node {
-    private String name;
     private boolean start = false;
     private boolean waterTile = false;
     private boolean treasureTile = false;
     private Vector<Node> parentNodes;
     private Vector<Node> childNodes;
+    private Position p;
 
-    Node(){}
+    public Node(){}
 
-    public Node(String name){
-        this.name = name;
+    public Node(Position p){
         parentNodes = new Vector<>();
         childNodes = new Vector<>();
+        this.p = p;
     }
 
-
-    public void setName(String n){
-        name = n;
+    public Node(Position p, char tile){
+        parentNodes = new Vector<>();
+        childNodes = new Vector<>();
+        this.p = p;
+        setValues(tile);
     }
 
     public void setStart(){
         start = true;
-        name = "*";
-    }
-    private void setTreasureTile(){
-        treasureTile = true;
-        name = "X";
     }
 
-    private void setWaterTile(){
+    public void setTreasureTile(){
+        treasureTile = true;
+    }
+
+    public void setWaterTile(){
         waterTile = true;
-        name = "!";
+    }
+
+    public void setPosition(Position p){
+        this.p = p;
     }
 
     void addChildNode(Node n){
@@ -53,29 +59,18 @@ public class Node {
         return parentNodes;
     }
 
-    public String getName(){
-        return name;
-    }
-
     public boolean getStart(){
         return start;
     }
 
     public boolean isWaterTile() { return waterTile; }
 
-    boolean isTreasureTile() { return treasureTile; }
+    public boolean isTreasureTile() { return treasureTile; }
+
+    public Position getPosition(){ return p; }
 
     public Vector<Node> getChildNodes(){
         return childNodes;
-    }
-
-    private String getChildNames(){
-        String result = "[ ";
-        for(int i = 0; i < childNodes.size(); i++){
-            result += childNodes.elementAt(i).getName() + " ";
-        }
-        result += "]";
-        return result;
     }
 
     public boolean checkParent(){
@@ -87,10 +82,6 @@ public class Node {
             if(n == parentNodes.elementAt(i)) return true;
         }
         return false;
-    }
-
-    public String toString(){
-        return name + "->" + getChildNames();
     }
 
     void setValues(char tile){

@@ -4,6 +4,8 @@ import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
 import com.CPS2002.assignment.Exceptions.InvalidPositionException;
 import com.CPS2002.assignment.Exceptions.WaterTileHitException;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by rodemic on 07/04/2017.
  */
@@ -19,8 +21,8 @@ public class Player {
         int y = 0;
 
         while(!check) {
-            x = (int) (Math.random() * (size));
-            y = (int) (Math.random() * (size));
+            x = ThreadLocalRandom.current().nextInt(0,size);
+            y = ThreadLocalRandom.current().nextInt(0,size);
             Position pos = new Position(x,y);
             if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
             else check = true;

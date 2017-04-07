@@ -48,5 +48,4 @@ public class Map {
        // Graph g = new Graph(map,position);
         return true;
     }
-
 }

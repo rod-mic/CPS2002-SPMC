@@ -1,7 +1,8 @@
 package main.java;
 
-import main.exceptions.*;
-import org.omg.CORBA.DynAnyPackage.Invalid;
+import main.exceptions.InvalidDirectionException;
+import main.exceptions.InvalidPositionException;
+import main.exceptions.WaterTileHitException;
 
 /**
  * Created by rodemic on 07/04/2017.
@@ -11,34 +12,39 @@ public class Player {
     Position position;
     Position startPosition;
 
-    Player(){
-        Map map = getMap();
+    Player(Map map){
         int size = map.getMapSize();
         boolean check = false;
+        int x = 0;
+        int y = 0;
+
         while(!check) {
-            int x = (int) Math.random() * size;
-            int y = (int) Math.random() * size;
+            x = (int) Math.random() * size;
+            y = (int) Math.random() * size;
             if (map.getTileType(x, y) != 'G') check = false;
             else check = true;
         }
+
+        startPosition = new Position(x,y);
+        position = startPosition;
     }
 
-    void move(char direction) throws InvalidDirectionException, InvalidPositionException{
+    void move(char direction, Map map) throws InvalidDirectionException, InvalidPositionException, WaterTileHitException {
         int x = position.getX();
         int y = position.getY();
-        boolean check = true;
+        boolean check;
         switch(direction) {
             case 'U':
-                check = setPosition(new Position(x, y + 1));
+                check = setPosition(new Position(x, y + 1), map);
                 break;
             case 'D':
-                check = setPosition(new Position(x, y - 1));
+                check = setPosition(new Position(x, y - 1), map);
                 break;
             case 'L':
-                check = setPosition(new Position(x - 1, y));
+                check = setPosition(new Position(x - 1, y), map);
                 break;
             case 'R':
-                check = setPosition(new Position(x + 1, y));
+                check = setPosition(new Position(x + 1, y), map);
                 break;
             default:
                 throw new InvalidDirectionException();
@@ -55,21 +61,28 @@ public class Player {
                     throw new InvalidPositionException("The player has hit the upper wall");
             }
         }
+        else if(map.getTileType(position.getX(),position.getY()) == 'W'){
+            moveToStart();
+            throw new WaterTileHitException();
+        }
     }
 
-    boolean setPosition(Position p){
-        boolean check = checkPosition(p);
+    private boolean setPosition(Position p, Map map){
+        boolean check = checkPosition(p,map);
+
         if(check) position = p;
         return check;
     }
 
-    boolean checkPosition(Position p){
+    boolean checkPosition(Position p, Map map) {
         int size = map.getMapSize();
-        if(p.getX() < 0 || p.getX() > size || p.getY() < 0 || p.getY() > size) return false;
-        else return true;
+        int x = p.getX();
+        int y = p.getY();
+
+        return !(x < 0 || x > size || y < 0 || y > size);
     }
 
-    void moveToStart(){
+    private void moveToStart() {
         position = startPosition;
     }
 }

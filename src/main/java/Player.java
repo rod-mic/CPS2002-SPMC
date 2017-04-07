@@ -21,7 +21,7 @@ public class Player {
         while(!check) {
             x = (int) Math.random() * size;
             y = (int) Math.random() * size;
-            if (map.getTileType(x, y) != 'G') check = false;
+            if (map.getTileType(new Position(x,y)) != 'G') check = false;
             else check = true;
         }
 

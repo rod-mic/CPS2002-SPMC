@@ -42,7 +42,7 @@ public class Node {
         name = "!";
     }
 
-    public void addChildNodes(Node n){
+    public void addChildNode(Node n){
         childNodes.add(n);
         n.addParentNodes(this);
     }
@@ -69,10 +69,6 @@ public class Node {
 
     public Vector<Node> getChildNodes(){
         return childNodes;
-    }
-
-    public void addChildNode(Node n){
-        childNodes.add(n);
     }
 
     public String getChildNames(){

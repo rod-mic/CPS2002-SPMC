@@ -50,4 +50,18 @@ public class BreathFirst extends Algorithm{
         }
         return result;
     }
+
+    public boolean checkPath(){
+        Vector<Node> start = new Vector<>();
+        Vector<Node> path = new Vector<>();
+        Vector<Node> checked = new Vector<>();
+        Vector<Vector<Node>> levels = new Vector<>();
+        start.add(rootNode);
+        checked.add(rootNode);
+        levels.add(start);
+        path = getPath(start, path, checked,levels,0);
+        path = reverseVector(path);
+        if(path.lastElement() == goal) return true;
+        else return false;
+    }
 }

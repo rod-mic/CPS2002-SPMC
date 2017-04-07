@@ -1,5 +1,8 @@
-import exceptions.InvalidDirectionException;
-import exceptions.InvalidPositionException;
+package main.java;
+
+import main.exceptions.*;
+import org.omg.CORBA.DynAnyPackage.Invalid;
+
 /**
  * Created by rodemic on 07/04/2017.
  */
@@ -20,7 +23,7 @@ public class Player {
         }
     }
 
-    void move(char direction){
+    void move(char direction) throws InvalidDirectionException, InvalidPositionException{
         int x = position.getX();
         int y = position.getY();
         boolean check = true;
@@ -39,22 +42,17 @@ public class Player {
                 break;
             default:
                 throw new InvalidDirectionException();
-                break;
         }
         if(!check){
             switch(direction) {
                 case 'U':
                     throw new InvalidPositionException("The player has hit the top wall");
-                    break;
                 case 'D':
                     throw new InvalidPositionException("The player has hit the bottom wall");
-                    break;
                 case 'L':
                     throw new InvalidPositionException("The player has hit the left wall");
-                    break;
                 case 'R':
                     throw new InvalidPositionException("The player has hit the upper wall");
-                    break;
             }
         }
     }

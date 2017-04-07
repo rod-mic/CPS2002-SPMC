@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Created by rodemic on 07/04/2017.
  */
@@ -7,15 +9,14 @@ public class Game {
     Player[] players;
     Map map;
 
+    public Game(){
+    }
+
     boolean startGame(){
         return true;
     }
 
     void generateHTMLFiles(){
-
-    }
-
-    void main(String[] args){
 
     }
 

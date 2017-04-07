@@ -4,7 +4,6 @@ package main.java;
  * Created by rodemic on 07/04/2017.
  */
 
-//TODO
 public class Map {
     private int size;
     private char[][] map = new char[size][size];
@@ -29,10 +28,20 @@ public class Map {
         int xrand = (int)(Math.random()*size + 1);
         int yrand = (int)(Math.random()*size + 1);
         map[xrand][yrand] = 'T';
-
+        int randomValue;
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                randomValue = (int)(Math.random()*6 +1);
+                if(map[i][j] != 'T'){
+                    if(randomValue == 5) map[i][j] = 'W';
+                    else map[i][j] = 'G';
+                }
+            }
+        }
     }
 
     public int getMapSize(){ return size; }
 
     public char getTileType(int x, int y){ return map[x][y];}
+
 }

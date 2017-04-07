@@ -4,6 +4,7 @@ import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
 import com.CPS2002.assignment.Exceptions.InvalidPositionException;
 import com.CPS2002.assignment.Exceptions.WaterTileHitException;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -13,6 +14,7 @@ public class Player {
 
     private Position position;
     private Position startPosition;
+    private ArrayList<Position> previousPositions = new ArrayList<Position>();
 
     public Player(Map map){
         int size = map.getMapSize();
@@ -24,13 +26,22 @@ public class Player {
             x = ThreadLocalRandom.current().nextInt(0,size);
             y = ThreadLocalRandom.current().nextInt(0,size);
             Position pos = new Position(x,y);
-            if (map.getTileType(pos) != 'G') check = false;
+            if (map.getTileType(pos) != 'G' || map.checkPath(pos)) check = false;
             else{
                 startPosition = pos;
                 position = pos;
+                addPosition(pos);
                 check = true;
             }
         }
+    }
+
+    void addPosition(Position p){
+        previousPositions.add(p);
+    }
+
+    ArrayList<Position> getPreviousPositions(){
+        return previousPositions;
     }
 
     public void move(char direction, Map map) throws InvalidDirectionException, InvalidPositionException, WaterTileHitException {

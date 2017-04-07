@@ -17,13 +17,13 @@ public class PlayerTest {
     private Map map = new Map();
 
     @org.junit.Before
-    public void Before(){
-        map.setMapSize(5,4);
+    public void Before() {
+        map.setMapSize(5, 4);
+        p = new Player(map);
     }
 
     @org.junit.Test
     public void moveUp() throws Exception, InvalidPositionException {
-        p = new Player(map);
         try{
             p.move('U',map);
         }catch(InvalidPositionException ex){
@@ -33,7 +33,6 @@ public class PlayerTest {
 
     @org.junit.Test
     public void moveDown() throws Exception, InvalidPositionException {
-        p = new Player(map);
         try{
             p.move('D',map);
         }catch(InvalidPositionException ex){
@@ -43,7 +42,6 @@ public class PlayerTest {
 
     @org.junit.Test
     public void moveLeft() throws Exception, InvalidPositionException {
-        p = new Player(map);
         try{
             p.move('L',map);
         }catch(InvalidPositionException ex){
@@ -53,7 +51,6 @@ public class PlayerTest {
 
     @org.junit.Test
     public void moveRight() throws Exception, InvalidPositionException {
-        p = new Player(map);
         try {
             p.move('R', map);
         }catch(InvalidPositionException ex){
@@ -63,7 +60,6 @@ public class PlayerTest {
 
     @org.junit.Test(expected = InvalidDirectionException.class)
     public void moveInvalidDirection() throws Exception, InvalidPositionException {
-        p = new Player(map);
         p.move('T',map);
     }
 
@@ -75,7 +71,7 @@ public class PlayerTest {
 
     @org.junit.Test
     public void checkPositionX_Max() throws Exception {
-        Position position = new Position(0,0);
+        Position position = new Position(6,0);
         assertEquals(false,p.checkPosition(position,map));
     }
 
@@ -87,7 +83,7 @@ public class PlayerTest {
 
     @org.junit.Test
     public void checkPositionY_Max() throws Exception {
-        Position position = new Position(0,0);
+        Position position = new Position(0,6);
         assertEquals(false,p.checkPosition(position,map));
     }
 

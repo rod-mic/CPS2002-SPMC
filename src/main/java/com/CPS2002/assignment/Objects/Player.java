@@ -17,19 +17,20 @@ public class Player {
     public Player(Map map){
         int size = map.getMapSize();
         boolean check = false;
-        int x = 0;
-        int y = 0;
+        int x;
+        int y;
 
         while(!check) {
             x = ThreadLocalRandom.current().nextInt(0,size);
             y = ThreadLocalRandom.current().nextInt(0,size);
             Position pos = new Position(x,y);
             if (map.getTileType(pos) != 'G') check = false;
-            else check = true;
+            else{
+                startPosition = pos;
+                position = pos;
+                check = true;
+            }
         }
-
-        startPosition = new Position(x,y);
-        position = startPosition;
     }
 
     public void move(char direction, Map map) throws InvalidDirectionException, InvalidPositionException, WaterTileHitException {

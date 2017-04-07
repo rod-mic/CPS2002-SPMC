@@ -86,7 +86,7 @@ public class Player {
                 break;
             case 'R':
                 if (!checkPosition(new Position(x+1, y),map))
-                    throw new InvalidPositionException("The player has hit the upper wall");
+                    throw new InvalidPositionException("The player has hit the right wall");
                 break;
             default: throw new InvalidDirectionException();
         }

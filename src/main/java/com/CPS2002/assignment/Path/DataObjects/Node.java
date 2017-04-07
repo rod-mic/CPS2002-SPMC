@@ -11,20 +11,13 @@ public class Node {
     private boolean start = false;
     private boolean waterTile = false;
     private boolean treasureTile = false;
-    private Vector<Node> parentNodes;
+    private Node parent;
     private Vector<Node> childNodes;
     private Position p;
 
     public Node(){}
 
-    public Node(Position p){
-        parentNodes = new Vector<>();
-        childNodes = new Vector<>();
-        this.p = p;
-    }
-
     public Node(Position p, char tile){
-        parentNodes = new Vector<>();
         childNodes = new Vector<>();
         this.p = p;
         setValues(tile);
@@ -46,22 +39,19 @@ public class Node {
         this.p = p;
     }
 
-    void addChildNode(Node n){
+    public void setParent(Node n){
+        parent = n;
+    }
+
+    public void addChildNode(Node n){
         childNodes.add(n);
-        n.addParentNodes(this);
     }
 
-    private void addParentNodes(Node n){
-        parentNodes.add(n);
+    public Node getParent(){
+        return parent;
     }
 
-    public Vector<Node> getParentNodes(){
-        return parentNodes;
-    }
-
-    public boolean getStart(){
-        return start;
-    }
+    public boolean getStart(){ return start; }
 
     public boolean isWaterTile() { return waterTile; }
 
@@ -71,17 +61,6 @@ public class Node {
 
     public Vector<Node> getChildNodes(){
         return childNodes;
-    }
-
-    public boolean checkParent(){
-        return parentNodes.size() != 0;
-    }
-
-    public boolean checkIfParent(Node n){
-        for(int i = 0 ; i < parentNodes.size(); i++){
-            if(n == parentNodes.elementAt(i)) return true;
-        }
-        return false;
     }
 
     void setValues(char tile){

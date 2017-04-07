@@ -17,6 +17,10 @@ public class Map {
     public Map(){
     }
 
+    public Map(int size){
+        this.size = size;
+    }
+
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){
             size = s;
@@ -25,7 +29,6 @@ public class Map {
             boolean check = true;
             while(check){
                 generate();
-                outputMap();
                 if(checkAnyPaths()) check = false;
             }
             return true;
@@ -37,7 +40,6 @@ public class Map {
             boolean check = true;
             while(check){
                 generate();
-                outputMap();
                 if(checkAnyPaths()) check = false;
             }
             return true;
@@ -45,7 +47,7 @@ public class Map {
         else return false;
     }
 
-    private void generate(){
+    public void generate(){
         int xrand = ThreadLocalRandom.current().nextInt(0,size);
         int yrand = ThreadLocalRandom.current().nextInt(0,size);
         map[xrand][yrand] = 'T';
@@ -53,7 +55,7 @@ public class Map {
         int randomValue;
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
-                randomValue = ThreadLocalRandom.current().nextInt(1,5);
+                randomValue = ThreadLocalRandom.current().nextInt(1,6);
                 if(map[i][j] != 'T'){
                     if(randomValue == 5) map[i][j] = 'W';
                     else map[i][j] = 'G';

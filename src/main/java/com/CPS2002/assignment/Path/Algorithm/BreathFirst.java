@@ -25,7 +25,7 @@ public class BreathFirst extends Algorithm{
                     Node checkParent = currentLevel.elementAt(i);
                     for(int k = depth; k > 0; k--){
                         for(int l = 0; l < pastLevels.elementAt(k-1).size(); l++){
-                            if(checkParent.getParentNodes().contains(pastLevels.elementAt(k-1).elementAt(l))) {
+                            if(checkParent.getParent() == pastLevels.elementAt(k-1).elementAt(l)) {
                                 path.add(pastLevels.elementAt(k-1).elementAt(l));
                                 checkParent = pastLevels.elementAt(k-1).elementAt(l);
                             }

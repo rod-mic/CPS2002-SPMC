@@ -2,7 +2,6 @@ package com.CPS2002.assignment.Objects;
 
 import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
 import com.CPS2002.assignment.Exceptions.InvalidPositionException;
-import com.CPS2002.assignment.Exceptions.WaterTileHitException;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -26,7 +25,7 @@ public class Player {
             x = ThreadLocalRandom.current().nextInt(0,size);
             y = ThreadLocalRandom.current().nextInt(0,size);
             Position pos = new Position(x,y);
-            if (map.getTileType(pos) != 'G' || map.checkPath(pos)) check = false;
+            if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
             else{
                 startPosition = pos;
                 position = pos;
@@ -44,66 +43,75 @@ public class Player {
         return previousPositions;
     }
 
-    public void move(char direction, Map map) throws InvalidDirectionException, InvalidPositionException, WaterTileHitException {
+    public void move(char direction) {
         int x = position.getX();
         int y = position.getY();
-        boolean check;
+        Position pos = null;
         switch(direction) {
             case 'U':
-                check = setPosition(new Position(x, y + 1), map);
+                pos = new Position(x,y+1);
+                setPosition(pos);
                 break;
             case 'D':
-                check = setPosition(new Position(x, y - 1), map);
+                pos = new Position(x, y - 1);
+                setPosition(pos);
                 break;
             case 'L':
-                check = setPosition(new Position(x - 1, y), map);
+                pos = new Position(x - 1, y);
+                setPosition(pos);
                 break;
             case 'R':
-                check = setPosition(new Position(x + 1, y), map);
+                pos = new Position(x + 1, y);
+                setPosition(pos);
                 break;
-            default:
-                throw new InvalidDirectionException();
         }
-        if(!check){
-            switch(direction) {
-                case 'U':
+        addPosition(pos);
+    }
+
+    private void setPosition(Position p){
+        position = p;
+    }
+
+    public void checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException{
+        int x = position.getX();
+        int y = position.getY();
+        switch(direction) {
+            case 'U':
+                if (!checkPosition(new Position(x, y+1),map))
                     throw new InvalidPositionException("The player has hit the top wall");
-                case 'D':
+                break;
+            case 'D':
+                if (!checkPosition(new Position(x, y-1),map))
                     throw new InvalidPositionException("The player has hit the bottom wall");
-                case 'L':
+                break;
+            case 'L':
+                if (!checkPosition(new Position(x-1, y),map))
                     throw new InvalidPositionException("The player has hit the left wall");
-                case 'R':
+                break;
+            case 'R':
+                if (!checkPosition(new Position(x+1, y),map))
                     throw new InvalidPositionException("The player has hit the upper wall");
-            }
-        }
-        else if(map.getTileType(position) == 'W'){
-            moveToStart();
-            throw new WaterTileHitException();
+                break;
+            default: throw new InvalidDirectionException();
         }
     }
 
-    private boolean setPosition(Position p, Map map){
-        boolean check = checkPosition(p,map);
-
-        if(check) position = p;
-        return check;
-    }
-
-    public boolean checkPosition(Position p, Map map) {
+    private boolean checkPosition(Position p, Map map) {
         int size = map.getMapSize();
         int x = p.getX();
         int y = p.getY();
 
-        if(x < 0 || y < 0)return false;
-        else if (x >= size || y >= size) return false;
-        else return true;
-        //return !(x < 0 || x > size || y < 0 || y > size);
+        return (x >= 0 && x < size && y >= 0 && y < size);
     }
 
     public Position getStartPosition(){
         return startPosition;
     }
-    private void moveToStart() {
+    protected void moveToStart() {
         position = startPosition;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }

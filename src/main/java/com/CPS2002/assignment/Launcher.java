@@ -67,5 +67,7 @@ public class Launcher {
 
         game = new Game(players,map);
         game.generateHTMLFiles();
+        game.startGame();
+
     }
 }

@@ -1,7 +1,28 @@
-package PACKAGE_NAME;
-
 /**
  * Created by rodemic on 07/04/2017.
  */
 public class Position {
+    int x;
+    int y;
+
+    Position(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    int getX(){
+        return x;
+    }
+
+    int getY(){
+        return y;
+    }
+
+    void setX(int x){
+        this.x = x;
+    }
+
+    void setY(int y){
+        this.y = y;
+    }
 }

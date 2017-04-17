@@ -114,6 +114,7 @@ public class GameTest {
 
     @Test
     public void cleanup() throws Exception {
+        g.generateHTMLFiles();
         g.cleanup();
     }
 

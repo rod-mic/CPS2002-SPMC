@@ -3,6 +3,7 @@ package com.CPS2002.assignment.Path.Algorithm;
 import com.CPS2002.assignment.Path.DataObjects.Graph;
 import com.CPS2002.assignment.Path.DataObjects.Node;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
@@ -15,28 +16,27 @@ public class BreathFirst extends Algorithm{
     }
 
 
-    public Vector<Node> getPath(Vector<Node> currentLevel, Vector<Node> path, Vector<Node> checked, Vector<Vector<Node>> pastLevels, int depth){
+     private Vector<Node> getPath(Vector<Node> currentLevel, Vector<Node> path, Vector<Node> checked, Vector<Vector<Node>> pastLevels, int depth){
         Vector<Node> nextLevel = new Vector<>();
         for(int i = 0; i < currentLevel.size(); i++){
-            Vector<Node> childs = currentLevel.elementAt(i).getChildNodes();
-            for(int j = 0; j < childs.size(); j++){
-                if(childs.elementAt(j).isTreasureTile()){
-                    path.add(childs.elementAt(j));
+            ArrayList<Node> childs = currentLevel.get(i).getChildNodes();
+            for (Node child : childs) {
+                if (child.isTreasureTile()) {
+                    path.add(child);
                     path.add(currentLevel.elementAt(i));
                     Node checkParent = currentLevel.elementAt(i);
-                    for(int k = depth; k > 0; k--){
-                        for(int l = 0; l < pastLevels.elementAt(k-1).size(); l++){
-                            if(checkParent.getParent().equals(pastLevels.elementAt(k-1).elementAt(l))) {
-                                path.add(pastLevels.elementAt(k-1).elementAt(l));
-                                checkParent = pastLevels.elementAt(k-1).elementAt(l);
+                    for (int k = depth; k > 0; k--) {
+                        for (int l = 0; l < pastLevels.elementAt(k - 1).size(); l++) {
+                            if (checkParent.getParent().equals(pastLevels.elementAt(k - 1).elementAt(l))) {
+                                path.add(pastLevels.elementAt(k - 1).elementAt(l));
+                                checkParent = pastLevels.elementAt(k - 1).elementAt(l);
                             }
                         }
                     }
                     return path;
-                }
-                else if(checked.contains(childs.elementAt(j))) continue;
-                nextLevel.add(childs.elementAt(j));
-                checked.add(childs.elementAt(j));
+                } else if (checked.contains(child)) continue;
+                nextLevel.add(child);
+                checked.add(child);
             }
         }
         pastLevels.add(nextLevel);
@@ -63,8 +63,7 @@ public class BreathFirst extends Algorithm{
         path = getPath(start, path, checked,levels,0);
         path = reverseVector(path);
         try{
-            if(path.lastElement().isTreasureTile()) return true;
-            else return false;
+            return (path.lastElement().isTreasureTile());
         }catch(NoSuchElementException e){
             return false;
         }

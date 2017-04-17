@@ -17,10 +17,6 @@ public class Map {
     public Map(){
     }
 
-    public Map(int size){
-        this.size = size;
-    }
-
     public boolean setMapSize(int s, int player){
         if(player >= 2 && player <= 4 && s >= 5){
             size = s;

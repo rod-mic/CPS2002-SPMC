@@ -63,7 +63,7 @@ public class Node {
 
     public Position getPosition(){ return p; }
 
-    public Vector<Node> getChildNodes(){
+    public ArrayList<Node> getChildNodes(){
         return childNodes;
     }
 

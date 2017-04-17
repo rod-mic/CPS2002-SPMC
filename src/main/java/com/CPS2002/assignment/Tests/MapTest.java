@@ -2,8 +2,6 @@ package com.CPS2002.assignment.Tests;
 
 
 import com.CPS2002.assignment.Objects.Map;
-import com.CPS2002.assignment.Objects.Position;
-import junit.framework.Assert;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -11,7 +9,7 @@ import static junit.framework.TestCase.assertEquals;
  * Created by thoma on 07/04/2017.
  */
 public class MapTest {
-    private Map m = new Map();
+    final private Map m = new Map();
 
     @org.junit.Test
     public void setMap_2player_goodSize(){

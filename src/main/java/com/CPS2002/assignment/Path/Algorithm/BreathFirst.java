@@ -9,13 +9,15 @@ import java.util.Vector;
 /**
  * Created by Thomas on 21/03/2017.
  */
-public class BreathFirst extends Algorithm{
+public class BreathFirst{
+    final Node rootNode;
+
     public BreathFirst(Graph g){
-        super(g);
+        rootNode = g.getRootNode();
     }
 
 
-     private Vector<Node> getPath(Vector<Node> currentLevel, Vector<Node> path, Vector<Node> checked, Vector<Vector<Node>> pastLevels, int depth){
+     public Vector<Node> getPath(Vector<Node> currentLevel, Vector<Node> path, Vector<Node> checked, Vector<Vector<Node>> pastLevels, int depth){
         Vector<Node> nextLevel = new Vector<>();
         for(int i = 0; i < currentLevel.size(); i++){
             Vector<Node> childs = currentLevel.get(i).getChildNodes();
@@ -43,7 +45,7 @@ public class BreathFirst extends Algorithm{
         else return getPath(nextLevel,path,checked,pastLevels,depth+1);
     }
 
-    private Vector<Node> reverseVector(Vector<Node> v){
+    public Vector<Node> reverseVector(Vector<Node> v){
         Vector<Node> result = new Vector<>();
         for(int i = v.size()-1; i >= 0; i--){
             result.add(v.elementAt(i));
@@ -67,4 +69,6 @@ public class BreathFirst extends Algorithm{
             return false;
         }
     }
+
+    public Node getRootNode(){ return rootNode; }
 }

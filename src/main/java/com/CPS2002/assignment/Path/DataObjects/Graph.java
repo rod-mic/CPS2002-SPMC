@@ -47,7 +47,9 @@ public class Graph {
 
     //public Node getGoalNode() { return goal; }
 
-    private boolean setNodes(Vector<Node> currentLevel, Vector<Node> checked) {
+    public ArrayList<Node> getListOfNodes(){ return listOfNodes; }
+
+    public boolean setNodes(Vector<Node> currentLevel, Vector<Node> checked) {
         Vector<Node> nextLevel = new Vector<>();
         for (int i = 0; i < currentLevel.size(); i++) {
             Node n = currentLevel.elementAt(i);
@@ -94,7 +96,7 @@ public class Graph {
         else return true;
     }
 
-    private Node getNodeByPosition(Position p){
+    public Node getNodeByPosition(Position p){
         Node n = new Node();
         boolean check = true;
         for(int i = 0; i < listOfNodes.size() && check; i++){

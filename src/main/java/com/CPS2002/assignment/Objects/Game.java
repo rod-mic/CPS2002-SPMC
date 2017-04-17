@@ -104,7 +104,7 @@ public class Game {
             System.out.println("Turn "+turn);
             for (int i = 0; i < players.length; i++) {
                 System.out.print("Direction to move Player " + i + ": ");
-                getUserDirection(players[i]);
+                direction[i] = getUserDirection(players[i]);
             }
 
             movePlayers(direction);
@@ -114,7 +114,7 @@ public class Game {
                 if(checkWinner(p)){
                     checkWin = true;
                     winners.add(i);
-                }else if(checkWater(p)){
+                }if(checkWater(p)){
                     System.out.println("Player "+i+" landed on a water tile. Going to starting position");
                     players[i].moveToStart();break;
                 }

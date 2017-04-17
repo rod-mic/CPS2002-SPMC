@@ -56,9 +56,9 @@ public class GameTest {
     public void printOneWinner() throws Exception {
         ArrayList<Integer> winners = new ArrayList<>();
         winners.add(1);
-        String output = "Player 1 found the Treasure!\n";
+        String output = "Player 1 found the Treasure!";
         g.printWinners(winners);
-        assertEquals(output,systemOutRule.getLog());
+        assertEquals(output,systemOutRule.getLog().trim());
     }
 
     @Test
@@ -67,9 +67,9 @@ public class GameTest {
         winners.add(1);
         winners.add(2);
         winners.add(3);
-        String output = "Players 1 2 3 found the Treasure!\n";
+        String output = "Players 1 2 3 found the Treasure!";
         g.printWinners(winners);
-        assertEquals(output,systemOutRule.getLog());
+        assertEquals(output,systemOutRule.getLog().trim());
     }
 
     @Test

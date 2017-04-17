@@ -53,9 +53,9 @@ public class Game {
         else {
             String print = "Players ";
             for (Integer winner : winners) {
-                print += Integer.toString(winner);
+                print += (Integer.toString(winner)+" ");
             }
-            System.out.println(print+ " found the Treasure!");
+            System.out.println(print+ "found the Treasure!");
         }
     }
 

@@ -22,7 +22,7 @@ public class Graph {
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map.length; j++){
                 Node n = new Node(new Position(i, j), map[i][j]);
-                if (position.getX() == i && position.getY() == j) {
+                if (position.getRow() == i && position.getCol() == j) {
                     rootNode = n;
                     rootNode.setStart();
                 }
@@ -30,7 +30,7 @@ public class Graph {
             }
         }
 
-        goal = new Node(treasure,map[treasure.getX()][treasure.getY()]);
+        goal = new Node(treasure,map[treasure.getRow()][treasure.getCol()]);
 
         Vector<Node> start = new Vector<>();
         Vector<Node> checked = new Vector<>();
@@ -55,8 +55,8 @@ public class Graph {
             Node n = currentLevel.elementAt(i);
             Position position = n.getPosition();
 
-            if (position.getX() - 1 >= 0) {
-                Node n1 = getNodeByPosition(new Position(position.getX()-1,position.getY()));
+            if (position.getRow() - 1 >= 0) {
+                Node n1 = getNodeByPosition(new Position(position.getRow()-1,position.getCol()));
                 if (!checked.contains(n1) && !n1.isWaterTile()) {
                     n.addChildNode(n1);
                     n1.setParent(n);
@@ -64,8 +64,8 @@ public class Graph {
                     checked.add(n1);
                 }
             }
-            if (position.getX() + 1 < map.length) {
-                Node n2 = getNodeByPosition(new Position(position.getX()+1,position.getY()));
+            if (position.getRow() + 1 < map.length) {
+                Node n2 = getNodeByPosition(new Position(position.getRow()+1,position.getCol()));
                 if (!checked.contains(n2) && !n2.isWaterTile()) {
                     n.addChildNode(n2);
                     n2.setParent(n);
@@ -73,8 +73,8 @@ public class Graph {
                     checked.add(n2);
                 }
             }
-            if ( position.getY() - 1 >= 0) {
-                Node n3 = getNodeByPosition(new Position(position.getX(),position.getY()-1));
+            if ( position.getCol() - 1 >= 0) {
+                Node n3 = getNodeByPosition(new Position(position.getRow(),position.getCol()-1));
                 if (!checked.contains(n3) && !n3.isWaterTile()) {
                     n.addChildNode(n3);
                     n3.setParent(n);
@@ -82,8 +82,8 @@ public class Graph {
                     checked.add(n3);
                 }
             }
-            if (position.getY() + 1 < map.length) {
-                Node n4 = getNodeByPosition(new Position(position.getX(),position.getY()+1));
+            if (position.getCol() + 1 < map.length) {
+                Node n4 = getNodeByPosition(new Position(position.getRow(),position.getCol()+1));
                 if (!checked.contains(n4) && !n4.isWaterTile()) {
                     n.addChildNode(n4);
                     n4.setParent(n);
@@ -101,7 +101,7 @@ public class Graph {
         boolean check = true;
         for(int i = 0; i < listOfNodes.size() && check; i++){
             Position p2 = listOfNodes.get(i).getPosition();
-            if(p2.getX() == p.getX() && p2.getY() == p.getY()){
+            if(p2.getRow() == p.getRow() && p2.getCol() == p.getCol()){
                 n = listOfNodes.get(i);
                 check = false;
             }
@@ -111,7 +111,7 @@ public class Graph {
 
     /*public void showPositions(){
         for(int i = 0; i < listOfNodes.size(); i++){
-            System.out.println("x: "+listOfNodes.get(i).getPosition().getX()+" | y: "+listOfNodes.get(i).getPosition().getY());
+            System.out.println("x: "+listOfNodes.get(i).getPosition().getRow()+" | y: "+listOfNodes.get(i).getPosition().getCol());
         }
         return true;
     }
@@ -120,7 +120,7 @@ public class Graph {
         for(int i = 0; i < listOfNodes.size(); i++){
             Position p = listOfNodes.get(i).getPosition();
             if(listOfNodes.get(i).getStart()) System.out.print("Start: ");
-            System.out.println(p.getX()+","+p.getY()+" -> " + listOfNodes.get(i).showChildPos());
+            System.out.println(p.getRow()+","+p.getCol()+" -> " + listOfNodes.get(i).showChildPos());
         }
 
         System.out.println("\n\n\n\n");

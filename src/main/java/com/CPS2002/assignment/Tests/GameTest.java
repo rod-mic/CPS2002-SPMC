@@ -8,10 +8,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 /**
  * Created by rodemic on 17/04/2017.
@@ -22,6 +24,11 @@ public class GameTest {
     Map m;
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+
+    @Rule
+    public final TextFromStandardInputStream systemInMock
+            = emptyStandardInputStream();
+
     @Before
     public void setup() throws Exception{
         m = new Map();
@@ -69,6 +76,39 @@ public class GameTest {
         winners.add(3);
         String output = "Players 1 2 3 found the Treasure!";
         g.printWinners(winners);
+        assertEquals(output,systemOutRule.getLog().trim());
+    }
+
+    @Test
+    public void InvalidDirectionUserInput() throws Exception{
+        systemInMock.provideLines("F","U");
+        String output = "F is invalid. Please enter (U)p, (D)own, (L)eft or (R)ight. Direction:";
+        Position pos = new Position(2,2);
+        Player pl = new Player(m);
+        pl.setPosition(pos);
+        g.getUserDirection(pl);
+        assertEquals(output,systemOutRule.getLog().trim());
+    }
+
+    @Test
+    public void InvalidPositionUserInput() throws Exception{
+        systemInMock.provideLines("U","D");
+        String output = "The player has hit the bottom wall. Direction:";
+        Position pos = new Position(2,0);
+        Player pl = new Player(m);
+        pl.setPosition(pos);
+        g.getUserDirection(pl);
+        assertEquals(output,systemOutRule.getLog().trim());
+    }
+
+    @Test
+    public void CorrectUserInput() throws Exception{
+        systemInMock.provideLines("D");
+        String output = "";
+        Position pos = new Position(2,0);
+        Player pl = new Player(m);
+        pl.setPosition(pos);
+        g.getUserDirection(pl);
         assertEquals(output,systemOutRule.getLog().trim());
     }
 

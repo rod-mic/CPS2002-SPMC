@@ -6,7 +6,6 @@ import com.CPS2002.assignment.Objects.Game;
 import com.CPS2002.assignment.Objects.Map;
 import com.CPS2002.assignment.Objects.Player;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -37,7 +36,7 @@ public class Launcher {
                 numPlayer = Integer.parseInt(sc.nextLine());
                 if(numPlayer < 2 || numPlayer > 8)throw new SizeException("2 and 8");
                 check = true;
-            }catch(InputMismatchException ex){
+            }catch(NumberFormatException ex){
                 System.out.println("Incorrect input. Numbers only. Try again: ");
                 check = false;
             }catch(SizeException ex){
@@ -58,7 +57,7 @@ public class Launcher {
                     else if ((mapSize < 8 || mapSize > 50) && numPlayer > 4) throw new SizeException("8x8 and 50x50");
                 }
                 check = true;
-            }catch(InputMismatchException ex){
+            }catch(NumberFormatException ex){
                 System.out.println("Incorrect input. Numbers only. Try again: ");
                 check = false;
             }catch(SizeException ex){

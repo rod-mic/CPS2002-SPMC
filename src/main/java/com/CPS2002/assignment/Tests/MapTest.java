@@ -50,7 +50,10 @@ public class MapTest {
     }
 
     @org.junit.Test
-    public void checkOutPutMap(){assertEquals(true, m.outputMap());}
+    public void checkOutPutMap(){
+        m.setMapSize(5,2);
+        assertEquals(true, m.outputMap());
+    }
 
     @org.junit.Test
     public void checkGenerate(){

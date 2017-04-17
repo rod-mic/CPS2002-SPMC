@@ -67,7 +67,7 @@ public class Map {
 
     public Position getTreasurePos(){return treasurePos;}
 
-    public char getTileType(Position position){ return map[position.getX()][position.getY()];}
+    public char getTileType(Position position){ return map[position.getRow()][position.getCol()];}
 
     public boolean initMap(int size){
         for(int i = 0; i < size; i++){

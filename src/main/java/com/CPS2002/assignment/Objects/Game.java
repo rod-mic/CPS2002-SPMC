@@ -83,10 +83,10 @@ public class Game {
             try {
                 p.checkDirection(direction, map);
             } catch (InvalidDirectionException e) {
-                System.out.print(direction + " is invalid. Please enter (U)p, (D)own, (L)eft or (R)ight. Direction: ");
+                System.out.print(direction + " is invalid. Please enter (U)p, (D)own, (L)eft or (R)ight. Direction:");
                 check = false;
             } catch (InvalidPositionException e) {
-                System.out.print(e.getMessage() + "Direction: ");
+                System.out.print(e.getMessage() + ". Direction: ");
                 check = false;
             }
 

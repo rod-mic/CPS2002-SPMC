@@ -54,7 +54,7 @@ public class Player {
                 setPosition(pos);
                 break;
             case 'D':
-                pos = new Position(row+1, y);
+                pos = new Position(row+1, col);
                 setPosition(pos);
                 break;
             case 'L':

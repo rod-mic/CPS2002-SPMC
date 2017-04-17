@@ -11,10 +11,10 @@ public class PositionTest {
     Position p = new Position(0,1);
 
     @org.junit.Test
-    public void checkGetX(){assertEquals(0,p.getX());}
+    public void checkgetRow(){assertEquals(0,p.getRow());}
 
     @org.junit.Test
-    public void checkGetY(){assertEquals(1,p.getY());}
+    public void checkgetCol(){assertEquals(1,p.getCol());}
 
     @org.junit.Test
     public void checkEqualsWhenNull(){

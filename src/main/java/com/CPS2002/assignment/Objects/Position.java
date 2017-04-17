@@ -4,20 +4,20 @@ package com.CPS2002.assignment.Objects;
  * Created by rodemic on 07/04/2017.
  */
 public class Position {
-    private int x;
-    private int y;
+    private int row;
+    private int column;
 
-    public Position(int x, int y){
-        this.x = x;
-        this.y = y;
+    public Position(int row, int column){
+        this.row = row;
+        this.column = column;
     }
 
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
 
-    public int getY(){
-        return y;
+    public int getCol(){
+        return column;
     }
 
     @Override
@@ -26,6 +26,6 @@ public class Position {
         if (other == this) return true;
         if (!(other instanceof Position))return false;
         Position pos = (Position)other;
-        return (pos.getX() == getX() && pos.getY() == getY());
+        return (pos.getRow() == getRow() && pos.getCol() == getCol());
     }
 }

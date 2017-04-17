@@ -76,7 +76,7 @@ public class Node {
     public String showChildPos(){
         String result = "";
         for(int i = 0; i < childNodes.size(); i++){
-            result += childNodes.elementAt(i).getPosition().getX() + "," + childNodes.elementAt(i).getPosition().getY() + "|";
+            result += childNodes.elementAt(i).getPosition().getRow() + "," + childNodes.elementAt(i).getPosition().getCol() + "|";
         }
         return result;
     }

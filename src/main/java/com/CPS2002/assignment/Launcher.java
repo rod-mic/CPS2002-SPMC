@@ -12,8 +12,14 @@ import java.util.Scanner;
 /**
  * Created by rodemic on 07/04/2017.
  */
-class Launcher {
+public class Launcher {
+
     public static void main(String[] args){
+        Game game = setup();
+        game.startGame();
+
+    }
+    public static Game setup(){
         boolean check = false;
         int numPlayer = 0;
         int mapSize;
@@ -67,7 +73,6 @@ class Launcher {
 
         game = new Game(players,map);
         game.generateHTMLFiles();
-        game.startGame();
-
+        return game;
     }
 }

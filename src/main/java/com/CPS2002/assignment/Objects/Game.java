@@ -26,43 +26,29 @@ public class Game {
         this.map = map;
     }
 
-    public void startGame(){
-        boolean check;
-        boolean checkWin = false;
-        char[] direction = new char[players.length];
-        ArrayList<Integer> winners = new ArrayList<>();
-        while(!checkWin) {
-            turn++;
-            for (int i = 0; i < players.length; i++) {
-                System.out.print("Direction to move Player " + i + ": ");
-                check = false;
-                while (!check) {
-                    direction[i] = sc.next().charAt(0);
-                    try {
-                        players[i].checkDirection(direction[i], map);
-                        check = true;
-                    } catch (InvalidDirectionException e) {
-
-                        System.out.print(direction[i] +" is invalid. Please enter (U)p, (D)own, (L)eft or (R)ight. Direction: ");
-                    } catch (InvalidPositionException e) {
-                        System.out.print(e.getMessage() + "Direction: ");
-                    }
-                }
-            }
-            for (int i = 0; i < players.length; i++) {
-                players[i].move(direction[i]);
-                Position pos = players[i].getPosition();
-                switch(map.getTileType(pos)){
-                    case 'W':
-                        System.out.println("Player "+i+" landed on a water tile. Going to starting position");
-                        players[i].moveToStart();break;
-                    case 'T':
-                        winners.add(i);
-                        checkWin = true;
-                }
-            }
-            generateHTMLFiles();
+    public void movePlayers(char[] direction){
+        for (int i = 0; i < players.length; i++) {
+            players[i].move(direction[i]);
         }
+    }
+
+    public boolean checkWinner(Player p){
+        Position pos = p.getPosition();
+        if(map.getTileType(pos) == 'T'){
+            return true;
+        }
+        else return false;
+    }
+
+    public boolean checkWater(Player p){
+        Position pos = p.getPosition();
+        if(map.getTileType(pos) == 'W'){
+            return true;
+        }
+        else return false;
+    }
+
+    public void printWinners(ArrayList<Integer> winners){
         if(winners.size() == 1)System.out.println("Player "+winners.get(0)+ " found the Treasure!");
         else {
             String print = "Players ";
@@ -71,6 +57,9 @@ public class Game {
             }
             System.out.println(print+ " found the Treasure!");
         }
+    }
+
+    public void cleanup(){
         for(int i = 0;i<players.length;i++){
             Path playerPath = Paths.get("player_html/map_player_"+ Integer.toString(i) + ".html");
             try {
@@ -82,6 +71,61 @@ public class Game {
         }
     }
 
+    public char getUserDirection(Player p){
+        char direction;
+        boolean check;
+
+        do{
+            check = true;
+
+            direction = sc.next().charAt(0);
+
+            try {
+                p.checkDirection(direction, map);
+            } catch (InvalidDirectionException e) {
+                System.out.print(direction + " is invalid. Please enter (U)p, (D)own, (L)eft or (R)ight. Direction: ");
+                check = false;
+            } catch (InvalidPositionException e) {
+                System.out.print(e.getMessage() + "Direction: ");
+                check = false;
+            }
+
+        }while(!check);
+
+        return direction;
+    }
+
+    public void startGame(){
+        boolean checkWin = false;
+        char[] direction = new char[players.length];
+        ArrayList<Integer> winners = new ArrayList<>();
+        while(!checkWin) {
+            turn++;
+            System.out.println("Turn "+turn);
+            for (int i = 0; i < players.length; i++) {
+                System.out.print("Direction to move Player " + i + ": ");
+                getUserDirection(players[i]);
+            }
+
+            movePlayers(direction);
+
+            for (int i = 0; i < players.length; i++) {
+                Player p = players[i];
+                if(checkWinner(p)){
+                    checkWin = true;
+                    winners.add(i);
+                }else if(checkWater(p)){
+                    System.out.println("Player "+i+" landed on a water tile. Going to starting position");
+                    players[i].moveToStart();break;
+                }
+            }
+            generateHTMLFiles();
+        }
+
+        printWinners(winners);
+        cleanup();
+    }
+
     public void generateHTMLFiles(){
         for(int i = 0;i<players.length;i++){
             String table = "";
@@ -89,7 +133,7 @@ public class Game {
                 table += "<tr>\n";
                 for(int k = 0;k < map.getMapSize();k++){
                     Position p = new Position(j,k);
-                    if(players[i].getStartPosition().equals(p)) {
+                    if(players[i].getPosition().equals(p)) {
                         switch(map.getTileType(p)){
                             case 'G': table += "<th class=\"grass\">&#9905;</th>\n";break;
                             case 'W': table += "<th class=\"water\">&#9905;</th>\n";break;

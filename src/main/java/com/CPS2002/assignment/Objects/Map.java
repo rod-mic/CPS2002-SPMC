@@ -49,7 +49,7 @@ public class Map {
         else return false;
     }
 
-    public void generate(){
+    public boolean generate(){
         int xrand = ThreadLocalRandom.current().nextInt(0,size);
         int yrand = ThreadLocalRandom.current().nextInt(0,size);
         map[xrand][yrand] = 'T';
@@ -64,6 +64,7 @@ public class Map {
                 }
             }
         }
+        return true;
     }
 
     public int getMapSize(){ return size; }
@@ -78,13 +79,14 @@ public class Map {
         }
     }
 
-    public void outputMap(){
+    public boolean outputMap(){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 System.out.print(map[i][j]+" ");
             }
             System.out.println();
         }
+        return true;
     }
 
     public boolean checkAnyPaths(){

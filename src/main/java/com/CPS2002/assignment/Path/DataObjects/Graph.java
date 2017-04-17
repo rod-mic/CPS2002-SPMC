@@ -46,7 +46,7 @@ public class Graph {
 
     public Node getGoalNode() { return goal; }
 
-    private void setNodes(Vector<Node> currentLevel, Vector<Node> checked) {
+    private boolean setNodes(Vector<Node> currentLevel, Vector<Node> checked) {
         Vector<Node> nextLevel = new Vector<>();
         for (int i = 0; i < currentLevel.size(); i++) {
             Node n = currentLevel.elementAt(i);
@@ -89,7 +89,8 @@ public class Graph {
                 }
             }
         }
-        if(nextLevel.size() != 0) setNodes(nextLevel,checked);
+        if(nextLevel.size() != 0) return setNodes(nextLevel,checked);
+        else return true;
     }
 
     public Node getNodeByPosition(Position p){
@@ -105,13 +106,14 @@ public class Graph {
         return n;
     }
 
-    public void showPositions(){
+    public boolean showPositions(){
         for(int i = 0; i < listOfNodes.size(); i++){
             System.out.println("x: "+listOfNodes.elementAt(i).getPosition().getX()+" | y: "+listOfNodes.elementAt(i).getPosition().getY());
         }
+        return true;
     }
 
-    public void goThroughGraph(){
+    public boolean goThroughGraph(){
         for(int i = 0; i < listOfNodes.size(); i++){
             Position p = listOfNodes.elementAt(i).getPosition();
             if(listOfNodes.elementAt(i).getStart()) System.out.print("Start: ");
@@ -119,5 +121,6 @@ public class Graph {
         }
 
         System.out.println("\n\n\n\n");
+        return true;
     }
 }

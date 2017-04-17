@@ -23,33 +23,37 @@ public class Node {
         setValues(tile);
     }
 
-    public void setStart(){
+    public boolean setStart(){
         start = true;
+        return true;
     }
 
-    public void setTreasureTile(){
+    public boolean setTreasureTile(){
         treasureTile = true;
+        return true;
     }
 
-    public void setWaterTile(){
+    public boolean setWaterTile(){
         waterTile = true;
+        return true;
     }
 
-    public void setPosition(Position p){
+    public boolean setPosition(Position p){
         this.p = p;
+        return true;
     }
 
-    public void setParent(Node n){
+    public boolean setParent(Node n){
         parent = n;
+        return true;
     }
 
-    public void addChildNode(Node n){
+    public boolean addChildNode(Node n){
         childNodes.add(n);
+        return true;
     }
 
-    public Node getParent(){
-        return parent;
-    }
+    public Node getParent(){ return parent; }
 
     public boolean getStart(){ return start; }
 
@@ -63,9 +67,10 @@ public class Node {
         return childNodes;
     }
 
-    void setValues(char tile){
+    public boolean setValues(char tile){
         if(tile == 'W') setWaterTile();
         else if(tile == 'T') setTreasureTile();
+        return true;
     }
 
     public String showChildPos(){

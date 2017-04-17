@@ -65,14 +65,17 @@ public class Map {
 
     public int getMapSize(){ return size; }
 
+    public Position getTreasurePos(){return treasurePos;}
+
     public char getTileType(Position position){ return map[position.getX()][position.getY()];}
 
-    private void initMap(int size){
+    public boolean initMap(int size){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 map[i][j] = ' ';
             }
         }
+        return true;
     }
 
     public boolean outputMap(){
@@ -97,7 +100,7 @@ public class Map {
         return false;
     }
 
-    boolean checkPath(Position position){
+    public boolean checkPath(Position position){
         Graph g = new Graph(this,position,treasurePos);
         BreathFirst b = new BreathFirst(g);
         return b.checkPath();

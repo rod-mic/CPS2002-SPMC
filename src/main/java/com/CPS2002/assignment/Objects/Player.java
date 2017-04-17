@@ -18,13 +18,13 @@ public class Player {
     public Player(Map map){
         int size = map.getMapSize();
         boolean check = false;
-        int x;
-        int y;
+        int row;
+        int col;
 
         while(!check) {
-            x = ThreadLocalRandom.current().nextInt(0,size);
-            y = ThreadLocalRandom.current().nextInt(0,size);
-            Position pos = new Position(x,y);
+            row = ThreadLocalRandom.current().nextInt(0,size);
+            col = ThreadLocalRandom.current().nextInt(0,size);
+            Position pos = new Position(row,col);
             if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
             else{
                 startPosition = pos;
@@ -35,84 +35,87 @@ public class Player {
         }
     }
 
-    private void addPosition(Position p){
+    public boolean addPosition(Position p){
         previousPositions.add(p);
+        return true;
     }
 
-    ArrayList<Position> getPreviousPositions(){
+    public ArrayList<Position> getPreviousPositions(){
         return previousPositions;
     }
 
-    void move(char direction) {
-        int x = position.getX();
-        int y = position.getY();
+    public boolean move(char direction) {
+        int row = position.getRow();
+        int col = position.getCol();
         Position pos = null;
         switch(direction) {
             case 'U':
-                pos = new Position(x,y+1);
+                pos = new Position(row-1,col);
                 setPosition(pos);
                 break;
             case 'D':
-                pos = new Position(x, y - 1);
+                pos = new Position(row+1, y);
                 setPosition(pos);
                 break;
             case 'L':
-                pos = new Position(x - 1, y);
+                pos = new Position(row, col - 1);
                 setPosition(pos);
                 break;
             case 'R':
-                pos = new Position(x + 1, y);
+                pos = new Position(row, col + 1);
                 setPosition(pos);
                 break;
         }
         addPosition(pos);
+        return true;
     }
 
-    void checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException{
-        int x = position.getX();
-        int y = position.getY();
+    public boolean checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException{
+        int row = position.getRow();
+        int col = position.getCol();
         switch(direction) {
             case 'U':
-                if (!checkPosition(new Position(x, y+1),map))
+                if (!checkPosition(new Position(row-1, col),map))
                     throw new InvalidPositionException("The player has hit the top wall");
                 break;
             case 'D':
-                if (!checkPosition(new Position(x, y-1),map))
+                if (!checkPosition(new Position(row+1, col),map))
                     throw new InvalidPositionException("The player has hit the bottom wall");
                 break;
             case 'L':
-                if (!checkPosition(new Position(x-1, y),map))
+                if (!checkPosition(new Position(row, col-1),map))
                     throw new InvalidPositionException("The player has hit the left wall");
                 break;
             case 'R':
-                if (!checkPosition(new Position(x+1, y),map))
+                if (!checkPosition(new Position(row, col+1),map))
                     throw new InvalidPositionException("The player has hit the right wall");
                 break;
             default: throw new InvalidDirectionException();
         }
+        return true;
     }
 
-    private boolean checkPosition(Position p, Map map) {
+    public boolean checkPosition(Position p, Map map) {
         int size = map.getMapSize();
-        int x = p.getX();
-        int y = p.getY();
+        int row = p.getRow();
+        int col = p.getCol();
 
-        return (x >= 0 && x < size && y >= 0 && y < size);
+        return (row >= 0 && row < size && col >= 0 && col < size);
     }
 
-    Position getStartPosition(){
+    public Position getStartPosition(){
         return startPosition;
     }
 
-    void moveToStart() {
+    public void moveToStart() {
         position = startPosition;
     }
 
-    Position getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    private void setPosition(Position p){
+    public void setPosition(Position p){
         position = p;
     }
 }

@@ -93,8 +93,8 @@ public class GameTest {
     @Test
     public void InvalidPositionUserInput() throws Exception{
         systemInMock.provideLines("U","D");
-        String output = "The player has hit the bottom wall. Direction:";
-        Position pos = new Position(2,0);
+        String output = "The player has hit the top wall. Direction:";
+        Position pos = new Position(0,0);
         Player pl = new Player(m);
         pl.setPosition(pos);
         g.getUserDirection(pl);
@@ -105,7 +105,7 @@ public class GameTest {
     public void CorrectUserInput() throws Exception{
         systemInMock.provideLines("D");
         String output = "";
-        Position pos = new Position(2,0);
+        Position pos = new Position(0,0);
         Player pl = new Player(m);
         pl.setPosition(pos);
         g.getUserDirection(pl);
@@ -114,11 +114,12 @@ public class GameTest {
 
     @Test
     public void cleanup() throws Exception {
-
+        g.generateHTMLFiles();
+        g.cleanup();
     }
 
     @Test
-    public void generateHTMLFiles1() throws Exception {
-
+    public void generateHTMLFiles() throws Exception {
+        g.generateHTMLFiles();
     }
 }

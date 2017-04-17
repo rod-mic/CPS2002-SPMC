@@ -3,7 +3,6 @@ package com.CPS2002.assignment.Path.Algorithm;
 import com.CPS2002.assignment.Path.DataObjects.Graph;
 import com.CPS2002.assignment.Path.DataObjects.Node;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
@@ -19,7 +18,7 @@ public class BreathFirst extends Algorithm{
      private Vector<Node> getPath(Vector<Node> currentLevel, Vector<Node> path, Vector<Node> checked, Vector<Vector<Node>> pastLevels, int depth){
         Vector<Node> nextLevel = new Vector<>();
         for(int i = 0; i < currentLevel.size(); i++){
-            ArrayList<Node> childs = currentLevel.get(i).getChildNodes();
+            Vector<Node> childs = currentLevel.get(i).getChildNodes();
             for (Node child : childs) {
                 if (child.isTreasureTile()) {
                     path.add(child);

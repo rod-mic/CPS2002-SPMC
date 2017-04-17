@@ -107,15 +107,17 @@ public class Player {
         return startPosition;
     }
 
-    public void moveToStart() {
+    public boolean moveToStart() {
         position = startPosition;
+        return true;
     }
 
     public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position p){
+    public boolean setPosition(Position p){
         position = p;
+        return true;
     }
 }

@@ -54,6 +54,7 @@ public class MapTest {
 
     @org.junit.Test
     public void checkGenerate() {
+        m.setMapSize(5,2,1);
         assertEquals(true, m.generate(0,10));
     }
 

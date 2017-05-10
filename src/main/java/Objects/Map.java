@@ -25,7 +25,7 @@ public class Map {
             boolean check = true;
             while(check){
                 chooseMapType(choice);
-                outputMap();
+                //outputMap();
                 if(checkAnyPaths(player)) check = false;
             }
             return true;
@@ -37,7 +37,7 @@ public class Map {
             boolean check = true;
             while(check){
                 chooseMapType(choice);
-                outputMap();
+                //outputMap();
                 if(checkAnyPaths(player)) check = false;
             }
             return true;

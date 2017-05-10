@@ -165,9 +165,9 @@ public class Game {
                 Files.write(playerPath,content.getBytes());
             } catch (Exception e) {
                 System.out.println("Error while writing map_player_"+Integer.toString(i)+ ".html. Exiting Program");
+                System.out.println("Error: "+e.toString());
                 exit(1);
             }
-
         }
     }
 }

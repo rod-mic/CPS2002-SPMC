@@ -1,4 +1,4 @@
-package com.CPS2002.assignment.Tests;
+package Test;
 
 import com.CPS2002.assignment.Launcher;
 import org.junit.Rule;

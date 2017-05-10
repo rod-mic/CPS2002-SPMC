@@ -1,11 +1,10 @@
-package com.CPS2002.assignment.Tests;
+package Test;
 
 import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
 import com.CPS2002.assignment.Exceptions.InvalidPositionException;
 import com.CPS2002.assignment.Objects.Map;
 import com.CPS2002.assignment.Objects.Player;
 import com.CPS2002.assignment.Objects.Position;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import static org.junit.Assert.*;
 

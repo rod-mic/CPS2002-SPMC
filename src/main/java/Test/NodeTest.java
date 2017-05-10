@@ -1,10 +1,8 @@
-package com.CPS2002.assignment.Tests;
+package Test;
 
 
 import com.CPS2002.assignment.Objects.Position;
 import com.CPS2002.assignment.Path.DataObjects.Node;
-
-import java.util.Vector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

@@ -108,23 +108,4 @@ public class Graph {
         }
         return n;
     }
-
-    /*public void showPositions(){
-        for(int i = 0; i < listOfNodes.size(); i++){
-            System.out.println("x: "+listOfNodes.get(i).getPosition().getRow()+" | y: "+listOfNodes.get(i).getPosition().getCol());
-        }
-        return true;
-    }
-
-    public boolean goThroughGraph(){
-        for(int i = 0; i < listOfNodes.size(); i++){
-            Position p = listOfNodes.get(i).getPosition();
-            if(listOfNodes.get(i).getStart()) System.out.print("Start: ");
-            System.out.println(p.getRow()+","+p.getCol()+" -> " + listOfNodes.get(i).showChildPos());
-        }
-
-        System.out.println("\n\n\n\n");
-        return true;
-    }
-    }*/
 }

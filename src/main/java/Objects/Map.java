@@ -25,7 +25,6 @@ public class Map {
             boolean check = true;
             while(check){
                 chooseMapType(choice);
-                //outputMap();
                 if(checkAnyPaths(player)) check = false;
             }
             return true;
@@ -37,7 +36,6 @@ public class Map {
             boolean check = true;
             while(check){
                 chooseMapType(choice);
-                //outputMap();
                 if(checkAnyPaths(player)) check = false;
             }
             return true;
@@ -56,7 +54,6 @@ public class Map {
             case 2: minPercentWaterTile = 25;
                     maxPercentWaterTile = 35;
                     break;
-            default: System.out.println("Invalid type");
         }
         generate(minPercentWaterTile,maxPercentWaterTile);
         return true;
@@ -82,24 +79,20 @@ public class Map {
         int currentWaterTiles = 0;
         for(int i = 0; i < maxWaterTiles; i++){
             if(currentWaterTiles < minWaterTiles) {
-                xrand = ThreadLocalRandom.current().nextInt(0, size);
-                yrand = ThreadLocalRandom.current().nextInt(0, size);
-                while(map[xrand][yrand] != 'G'){
+                do{
                     xrand = ThreadLocalRandom.current().nextInt(0, size);
                     yrand = ThreadLocalRandom.current().nextInt(0, size);
-                }
+                }while(map[xrand][yrand] != 'G');
                 map[xrand][yrand] = 'W';
                 currentWaterTiles++;
             }
             else{
                int randomValue = ThreadLocalRandom.current().nextInt(0,2);
                if(randomValue == 1){
-                   xrand = ThreadLocalRandom.current().nextInt(0, size);
-                   yrand = ThreadLocalRandom.current().nextInt(0, size);
-                   while(map[xrand][yrand] != 'G'){
+                   do{
                        xrand = ThreadLocalRandom.current().nextInt(0, size);
                        yrand = ThreadLocalRandom.current().nextInt(0, size);
-                   }
+                   } while(map[xrand][yrand] != 'G');
                    map[xrand][yrand] = 'W';
                }
             }

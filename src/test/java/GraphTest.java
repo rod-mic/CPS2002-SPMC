@@ -18,8 +18,7 @@ public class GraphTest {
 
     @org.junit.Before
     public void Before() {
-        m.setMapSize(5, 2);
-        m.generate();
+        m.setMapSize(5, 2,1);
         g = new Graph(m, new Position(0, 1), m.getTreasurePos());
     }
 

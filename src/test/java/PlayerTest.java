@@ -16,8 +16,7 @@ public class PlayerTest {
 
     @org.junit.Before
     public void Before() {
-        m.setMapSize(6, 2);
-        m.generate();
+        m.setMapSize(6, 2,1);
         p = new Player(m);
     }
 

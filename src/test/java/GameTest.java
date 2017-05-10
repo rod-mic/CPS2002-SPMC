@@ -29,7 +29,7 @@ public class GameTest {
     @Before
     public void setup() throws Exception {
         m = new Map();
-        m.setMapSize(5, 2);
+        m.setMapSize(5, 2,1);
         p[0] = new Player(m);
         p[1] = new Player(m);
         g = new Game(p, m);

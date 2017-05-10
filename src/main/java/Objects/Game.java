@@ -3,6 +3,7 @@ package Objects;
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -161,7 +162,9 @@ public class Game {
                 exit(1);
             }
             Path playerPath = Paths.get("player_html/map_player_"+ Integer.toString(i) + ".html");
+            File playerHtmlFolder = new File("player_html");
             try {
+                playerHtmlFolder.mkdir();
                 Files.write(playerPath,content.getBytes());
             } catch (Exception e) {
                 System.out.println("Error while writing map_player_"+Integer.toString(i)+ ".html. Exiting Program");

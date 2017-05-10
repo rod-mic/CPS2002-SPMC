@@ -1,10 +1,8 @@
-package Test;
-
-import com.CPS2002.assignment.Objects.Map;
-import com.CPS2002.assignment.Objects.Position;
-import com.CPS2002.assignment.Path.Algorithm.BreathFirst;
-import com.CPS2002.assignment.Path.DataObjects.Graph;
-import com.CPS2002.assignment.Path.DataObjects.Node;
+import Objects.Map;
+import Objects.Position;
+import Path.Algorithm.BreathFirst;
+import Path.DataObjects.Graph;
+import Path.DataObjects.Node;
 
 import java.util.Vector;
 
@@ -24,26 +22,26 @@ public class BreathFirstTest {
     public void Before() {
         m.setMapSize(5, 2);
         m.generate();
-        g = new Graph(m,new Position(0,1), m.getTreasurePos());
+        g = new Graph(m, new Position(0, 1), m.getTreasurePos());
         b = new BreathFirst(g);
     }
 
     @org.junit.Test
-    public void checkPathTest(){
-        assertEquals(true,b.checkPath());
+    public void checkPathTest() {
+        assertEquals(true, b.checkPath());
     }
 
     @org.junit.Test
-    public void checkReverseVector(){
+    public void checkReverseVector() {
         Vector<Node> v = new Vector<>();
-        Node n1 = new Node(new Position(0,0),'G');
-        Node n2 = new Node(new Position(0,1),'T');
-        Node n3 = new Node(new Position(0,2),'W');
+        Node n1 = new Node(new Position(0, 0), 'G');
+        Node n2 = new Node(new Position(0, 1), 'T');
+        Node n3 = new Node(new Position(0, 2), 'W');
         assertNotNull(b.reverseVector(v));
     }
 
     @org.junit.Test
-    public void checkGetPathTest(){
+    public void checkGetPathTest() {
         Vector<Node> start = new Vector<>();
         Vector<Node> path = new Vector<>();
         Vector<Node> checked = new Vector<>();
@@ -51,11 +49,11 @@ public class BreathFirstTest {
         start.add(b.getRootNode());
         checked.add(b.getRootNode());
         levels.add(start);
-        assertNotNull(b.getPath(start, path, checked,levels,0));
+        assertNotNull(b.getPath(start, path, checked, levels, 0));
     }
 
     @org.junit.Test
-    public void checkGetRootNode(){
+    public void checkGetRootNode() {
         assertNotNull(b.getRootNode());
     }
 

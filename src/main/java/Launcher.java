@@ -1,10 +1,7 @@
-package com.CPS2002.assignment;
-
-
-import com.CPS2002.assignment.Exceptions.SizeException;
-import com.CPS2002.assignment.Objects.Game;
-import com.CPS2002.assignment.Objects.Map;
-import com.CPS2002.assignment.Objects.Player;
+import Exceptions.SizeException;
+import Objects.Game;
+import Objects.Map;
+import Objects.Player;
 
 import java.util.Scanner;
 

@@ -1,9 +1,9 @@
-package com.CPS2002.assignment.Path.DataObjects;
+package Path.DataObjects;
 /**
  * Created by Thomas on 21/03/2017.
  */
 
-import com.CPS2002.assignment.Objects.Position;
+import Objects.Position;
 
 import java.util.Vector;
 

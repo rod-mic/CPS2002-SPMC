@@ -1,7 +1,7 @@
-package com.CPS2002.assignment.Objects;
+package Objects;
 
-import com.CPS2002.assignment.Exceptions.InvalidDirectionException;
-import com.CPS2002.assignment.Exceptions.InvalidPositionException;
+import Exceptions.InvalidDirectionException;
+import Exceptions.InvalidPositionException;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;

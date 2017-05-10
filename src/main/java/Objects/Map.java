@@ -1,7 +1,7 @@
-package com.CPS2002.assignment.Objects;
+package Objects;
 
-import com.CPS2002.assignment.Path.Algorithm.BreathFirst;
-import com.CPS2002.assignment.Path.DataObjects.Graph;
+import Path.Algorithm.BreathFirst;
+import Path.DataObjects.Graph;
 
 import java.util.concurrent.ThreadLocalRandom;
 

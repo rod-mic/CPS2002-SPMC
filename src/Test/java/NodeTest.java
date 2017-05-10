@@ -1,8 +1,5 @@
-package Test;
-
-
-import com.CPS2002.assignment.Objects.Position;
-import com.CPS2002.assignment.Path.DataObjects.Node;
+import Objects.Position;
+import Path.DataObjects.Node;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -14,7 +11,7 @@ public class NodeTest {
 
     private Node n = new Node();
 
-    private Position p = new Position(1,1);
+    private Position p = new Position(1, 1);
     private Node n2 = new Node(p, 'G');
 
     @org.junit.Before
@@ -22,52 +19,56 @@ public class NodeTest {
         n2.setStart();
         n.setParent(n2);
         n2.addChildNode(n);
-        Position p2 = new Position(1,2);
+        Position p2 = new Position(1, 2);
         n.setPosition(p2);
     }
 
     @org.junit.Test
-    public void checkPositionConstructor2(){ assertEquals(p,n2.getPosition()); }
+    public void checkPositionConstructor2() {
+        assertEquals(p, n2.getPosition());
+    }
 
     @org.junit.Test
-    public void checkTileConstructor2(){
-        assertEquals(false,n2.isWaterTile());
+    public void checkTileConstructor2() {
+        assertEquals(false, n2.isWaterTile());
         assertEquals(false, n2.isTreasureTile());
     }
 
     @org.junit.Test
-    public void checkStart(){
+    public void checkStart() {
         assertEquals(true, n.setStart());
     }
 
     @org.junit.Test
-    public void checkTreasure(){
+    public void checkTreasure() {
         assertEquals(true, n.setTreasureTile());
     }
 
     @org.junit.Test
-    public void checkWater(){
+    public void checkWater() {
         assertEquals(true, n.setWaterTile());
     }
 
     @org.junit.Test
-    public void checkGetPosition(){
-        Position p2 = new Position(1,2);
+    public void checkGetPosition() {
+        Position p2 = new Position(1, 2);
         assertEquals(true, n.setPosition(p2));
     }
 
     @org.junit.Test
-    public void checkParent(){
+    public void checkParent() {
         assertEquals(true, n.setParent(n2));
     }
 
     @org.junit.Test
-    public void checkChild(){
+    public void checkChild() {
         assertEquals(true, n2.addChildNode(n));
     }
 
     @org.junit.Test
-    public void checkGetParent(){ assertEquals(n2,n.getParent());}
+    public void checkGetParent() {
+        assertEquals(n2, n.getParent());
+    }
 
     @org.junit.Test
     public void getParentWhenNull() {
@@ -75,31 +76,39 @@ public class NodeTest {
     }
 
     @org.junit.Test
-    public void checkGetStart(){ assertEquals(true,n2.getStart());}
+    public void checkGetStart() {
+        assertEquals(true, n2.getStart());
+    }
 
     @org.junit.Test
-    public void checkGetStartWhenFalse(){ assertEquals(false,n.getStart());}
+    public void checkGetStartWhenFalse() {
+        assertEquals(false, n.getStart());
+    }
 
     @org.junit.Test
-    public void checkIsWater(){ assertEquals(false, n.isWaterTile());}
+    public void checkIsWater() {
+        assertEquals(false, n.isWaterTile());
+    }
 
     @org.junit.Test
-    public void checkIsTreasure(){ assertEquals(false, n.isTreasureTile());}
+    public void checkIsTreasure() {
+        assertEquals(false, n.isTreasureTile());
+    }
 
     @org.junit.Test
-    public void checkGetChildNodes(){
+    public void checkGetChildNodes() {
         assertNull(n.getChildNodes());
     }
 
     @org.junit.Test
-    public void checkSetValues(){
+    public void checkSetValues() {
         Node n3 = new Node();
         assertEquals(true, n3.setValues('T'));
     }
 
     @org.junit.Test
-    public void checkShowChildPos(){
-        assertEquals("1,2|",n2.showChildPos());
+    public void checkShowChildPos() {
+        assertEquals("1,2|", n2.showChildPos());
     }
 
 }

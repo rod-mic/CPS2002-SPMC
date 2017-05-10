@@ -1,4 +1,4 @@
-package com.CPS2002.assignment.Objects;
+package Objects;
 
 /**
  * Created by rodemic on 07/04/2017.

@@ -1,11 +1,11 @@
-package com.CPS2002.assignment.Path.DataObjects;
+package Path.DataObjects;
 
 /**
  * Created by thoma on 07/04/2017.
  */
 
-import com.CPS2002.assignment.Objects.Map;
-import com.CPS2002.assignment.Objects.Position;
+import Objects.Map;
+import Objects.Position;
 
 import java.util.ArrayList;
 import java.util.Vector;

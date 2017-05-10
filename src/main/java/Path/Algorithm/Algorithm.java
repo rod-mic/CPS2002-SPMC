@@ -1,7 +1,7 @@
-package com.CPS2002.assignment.Path.Algorithm;
+package Path.Algorithm;
 
-import com.CPS2002.assignment.Path.DataObjects.Graph;
-import com.CPS2002.assignment.Path.DataObjects.Node;
+import Path.DataObjects.Graph;
+import Path.DataObjects.Node;
 
 /**
  * Created by Thomas on 21/03/2017.

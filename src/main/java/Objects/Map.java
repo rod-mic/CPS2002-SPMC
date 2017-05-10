@@ -17,16 +17,16 @@ public class Map {
     public Map(){
     }
 
-    public boolean setMapSize(int s, int player){
+    public boolean setMapSize(int s, int player, int choice){
         if(player >= 2 && player <= 4 && s >= 5){
             size = s;
             map = new char[size][size];
             initMap(size);
             boolean check = true;
             while(check){
-                generate();
-                //outputMap();
-                if(checkAnyPaths()) check = false;
+                chooseMapType(choice);
+                outputMap();
+                if(checkAnyPaths(player)) check = false;
             }
             return true;
         }
@@ -36,30 +36,76 @@ public class Map {
             initMap(size);
             boolean check = true;
             while(check){
-                generate();
-                //outputMap();
-                if(checkAnyPaths()) check = false;
+                chooseMapType(choice);
+                outputMap();
+                if(checkAnyPaths(player)) check = false;
             }
             return true;
         }
         else return false;
     }
 
-    public boolean generate(){
-        int xrand = ThreadLocalRandom.current().nextInt(0,size);
-        int yrand = ThreadLocalRandom.current().nextInt(0,size);
+    public boolean chooseMapType(int choice){
+        int maxPercentWaterTile = 0;
+        int minPercentWaterTile = 0;
+
+        switch(choice){
+            case 1: minPercentWaterTile = 0;
+                    maxPercentWaterTile = 10;
+                    break;
+            case 2: minPercentWaterTile = 25;
+                    maxPercentWaterTile = 35;
+                    break;
+            default: System.out.println("Invalid type");
+        }
+        generate(minPercentWaterTile,maxPercentWaterTile);
+        return true;
+    }
+
+    public boolean generate(int minWater, int maxWater){
+        //Setting Treasure Tile
+        int xrand = ThreadLocalRandom.current().nextInt(0, size);
+        int yrand = ThreadLocalRandom.current().nextInt(0, size);
         map[xrand][yrand] = 'T';
-        treasurePos = new Position(xrand,yrand);
-        int randomValue;
+        treasurePos = new Position(xrand, yrand);
+
+        //Setting Grass Tiles
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
-                randomValue = ThreadLocalRandom.current().nextInt(1,6);
-                if(map[i][j] != 'T'){
-                    if(randomValue == 5) map[i][j] = 'W';
-                    else map[i][j] = 'G';
-                }
+                if(map[i][j] != 'T') map[i][j] = 'G';
             }
         }
+
+        //Setting Water Tiles
+        int minWaterTiles = (size * size * minWater)/100;
+        int maxWaterTiles = (size * size * maxWater)/100;
+        int currentWaterTiles = 0;
+        for(int i = 0; i < maxWaterTiles; i++){
+            if(currentWaterTiles < minWaterTiles) {
+                xrand = ThreadLocalRandom.current().nextInt(0, size);
+                yrand = ThreadLocalRandom.current().nextInt(0, size);
+                while(map[xrand][yrand] != 'G'){
+                    xrand = ThreadLocalRandom.current().nextInt(0, size);
+                    yrand = ThreadLocalRandom.current().nextInt(0, size);
+                }
+                map[xrand][yrand] = 'W';
+                currentWaterTiles++;
+            }
+            else{
+               int randomValue = ThreadLocalRandom.current().nextInt(0,2);
+               if(randomValue == 1){
+                   xrand = ThreadLocalRandom.current().nextInt(0, size);
+                   yrand = ThreadLocalRandom.current().nextInt(0, size);
+                   while(map[xrand][yrand] != 'G'){
+                       xrand = ThreadLocalRandom.current().nextInt(0, size);
+                       yrand = ThreadLocalRandom.current().nextInt(0, size);
+                   }
+                   map[xrand][yrand] = 'W';
+               }
+            }
+        }
+
+
         return true;
     }
 
@@ -88,16 +134,17 @@ public class Map {
         return true;
     }
 
-    public boolean checkAnyPaths(){
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
+    public boolean checkAnyPaths(int player){
+        int possiblePaths = 0;
+        for(int i = 0; i < size && possiblePaths < player; i++){
+            for(int j = 0; j < size && possiblePaths < player; j++){
                 if(map[i][j] == 'G'){
                     Position p = new Position(i,j);
-                    if(checkPath(p)) return true;
+                    if(checkPath(p)) possiblePaths++;
                 }
             }
         }
-        return false;
+        return possiblePaths == player;
     }
 
     public boolean checkPath(Position position){

@@ -26,6 +26,22 @@ public class Launcher {
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println("Welcome to the game!");
+        System.out.println("Choose map type: (1) Safe - (2) Hazardous");
+
+        int choice = 0;
+        while(!check){
+            try{
+                choice = Integer.parseInt(sc.nextLine());
+                if(choice > 0 && choice < 3){
+                    check = true;
+                }
+                else System.out.println("Invalid input");
+            }catch(NumberFormatException e){
+                System.out.println("Invalid input");
+                check = false;
+            }
+        }check = false;
+
         System.out.println("How many users will be playing? (2-8 Players)");
 
         while(!check){
@@ -49,7 +65,7 @@ public class Launcher {
         while(!check){
             try {
                 mapSize = Integer.parseInt(sc.nextLine());
-                if(!map.setMapSize(mapSize,numPlayer)) {
+                if(!map.setMapSize(mapSize,numPlayer,choice)) {
                     if ((mapSize < 5 || mapSize > 50) && numPlayer < 5) throw new SizeException("5x5 and 50x50");
                     else if ((mapSize < 8 || mapSize > 50) && numPlayer > 4) throw new SizeException("8x8 and 50x50");
                 }

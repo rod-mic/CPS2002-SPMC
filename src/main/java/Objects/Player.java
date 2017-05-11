@@ -13,9 +13,31 @@ public class Player {
 
     private Position position;
     private Position startPosition;
-    final private ArrayList<Position> previousPositions = new ArrayList<>();
+    private Team team;
+
+    public Player(Map map, Team team){
+        this.team = team;
+        int size = map.getMapSize();
+        boolean check = false;
+        int row;
+        int col;
+
+        while(!check) {
+            row = ThreadLocalRandom.current().nextInt(0,size);
+            col = ThreadLocalRandom.current().nextInt(0,size);
+            Position pos = new Position(row,col);
+            if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
+            else{
+                startPosition = pos;
+                position = pos;
+                addPosition(pos);
+                check = true;
+            }
+        }
+    }
 
     public Player(Map map){
+        this.team = new Team();
         int size = map.getMapSize();
         boolean check = false;
         int row;
@@ -36,12 +58,11 @@ public class Player {
     }
 
     public boolean addPosition(Position p){
-        previousPositions.add(p);
-        return true;
+        return team.addPosition(p);
     }
 
     public ArrayList<Position> getPreviousPositions(){
-        return previousPositions;
+        return team.getPreviousPositions();
     }
 
     public boolean move(char direction) {

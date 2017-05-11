@@ -19,11 +19,12 @@ public class LauncherTest {
 
     @Test
     public void IncorrectUserAmount() throws Exception {
-        systemInMock.provideLines("1","9", "2", "20");
+        systemInMock.provideLines("1","1","9", "2", "20");
         String output = "Welcome to the game!\n" +
+                "Choose game type: (1) Individual - (2) Collaborative\n"+
                 "Choose map type: (1) Safe - (2) Hazardous\n" +
                 "How many users will be playing? (2-8 Players)\n" +
-                "There can only be between 2 and 8 players. Try again: \n" +
+                "The range is between 2 and 8. Try again: \n" +
                 "How big  will the map be? (Between 5x5 and 50x50)\n";
         l.setup();
         assertEquals(output, systemOutRule.getLogWithNormalizedLineSeparator());
@@ -31,32 +32,35 @@ public class LauncherTest {
 
     @Test
     public void IncorrectMapSizeSmall() throws Exception {
-        systemInMock.provideLines("1","2", "4", "5");
+        systemInMock.provideLines("1","1","2", "4", "5");
         String output = "Welcome to the game!\n" +
+                "Choose game type: (1) Individual - (2) Collaborative\n"+
                 "Choose map type: (1) Safe - (2) Hazardous\n" +
                 "How many users will be playing? (2-8 Players)\n" +
                 "How big  will the map be? (Between 5x5 and 50x50)\n" +
-                "The size must be between 5x5 and 50x50 tiles. Try again: \n";
+                "The range is between 5 and 50. Try again: \n";
         l.setup();
         assertEquals(output, systemOutRule.getLogWithNormalizedLineSeparator());
     }
 
     @Test
     public void IncorrectMapSizeBig() throws Exception {
-        systemInMock.provideLines("1","6", "6", "8");
+        systemInMock.provideLines("1","1","6", "6", "8");
         String output = "Welcome to the game!\n" +
+                "Choose game type: (1) Individual - (2) Collaborative\n"+
                 "Choose map type: (1) Safe - (2) Hazardous\n" +
                 "How many users will be playing? (2-8 Players)\n" +
                 "How big  will the map be? (Between 8x8 and 50x50)\n" +
-                "The size must be between 8x8 and 50x50 tiles. Try again: \n";
+                "The range is between 8 and 50. Try again: \n";
         l.setup();
         assertEquals(output, systemOutRule.getLogWithNormalizedLineSeparator());
     }
 
     @Test
     public void IncorrectInput() throws Exception {
-        systemInMock.provideLines("1","a", "6", "a", "8");
+        systemInMock.provideLines("1","1","a", "6", "a", "8");
         String output = "Welcome to the game!\n" +
+                "Choose game type: (1) Individual - (2) Collaborative\n"+
                 "Choose map type: (1) Safe - (2) Hazardous\n" +
                 "How many users will be playing? (2-8 Players)\n" +
                 "Incorrect input. Numbers only. Try again: \n" +

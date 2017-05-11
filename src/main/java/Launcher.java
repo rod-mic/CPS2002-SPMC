@@ -39,12 +39,10 @@ public class Launcher {
 
     public static Game setup() {
         int numPlayer;
-        int numTeam;
         int mapSize;
         int mapType;
         int gameType;
 
-        Team[] teams;
         Player[] players;
         Map map = new Map();
         Game game;
@@ -75,25 +73,32 @@ public class Launcher {
         if (gameType == 2) {
             int max = (int) Math.ceil(numPlayer / 2.0);
             System.out.println("How many teams will be playing? (2-" + max + " Teams)");
-            numTeam = getIntegerInput(2, max, sc);
-            teams = new Team[numTeam];
-
-            int maxSize = (int) Math.ceil((double) numPlayer / numTeam);
+            int numTeam = getIntegerInput(2, max, sc);
+            Team[] teams = new Team[numTeam];
 
             for (int i = 0; i < numTeam; i++) {
                 teams[i] = new Team();
             }
 
-            for (int i = 0; i < numPlayer; i++) {
-                int randTeam;
-                Team chosenTeam;
+
+            int playerCounter = 0;
+            int teamCounter = 0;
+            while(playerCounter < numPlayer){
+
+                if(teamCounter >= numTeam)
+                    teamCounter = 0;
+
+                int randPlayer;
+                Player chosenPlayer;
+                Team currentTeam = teams[teamCounter];
+
                 do {
-                    randTeam = ThreadLocalRandom.current().nextInt(0, numTeam);
-                    chosenTeam = teams[randTeam];
-                } while (chosenTeam.getSize() > maxSize);
-                chosenTeam.incrementSize();
-                System.out.println("Team " + randTeam + " added to player " + i);
-                players[i] = new Player(map, chosenTeam);
+                    randPlayer = ThreadLocalRandom.current().nextInt(0, numPlayer);
+                    chosenPlayer = players[randPlayer];
+                } while (chosenPlayer != null);
+
+                System.out.println("Player "+randPlayer+" added to team "+teamCounter);
+                players[randPlayer] = new Player(map,currentTeam);
             }
         } else {
             for (int i = 0; i < numPlayer; i++) {

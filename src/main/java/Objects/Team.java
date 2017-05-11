@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class Team {
     private ArrayList<Position> previousPositions = new ArrayList<>();
-    int size = 0;
 
     public boolean addPosition(Position p) {
         if(!previousPositions.contains(p))
@@ -15,15 +14,7 @@ public class Team {
         return true;
     }
 
-    public void incrementSize(){
-        size++;
-    }
-
     public ArrayList<Position> getPreviousPositions() {
         return previousPositions;
-    }
-
-    public int getSize() {
-        return size;
     }
 }

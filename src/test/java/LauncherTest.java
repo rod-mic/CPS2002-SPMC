@@ -64,11 +64,11 @@ public class LauncherTest {
     @Test
     public void SingleplayerSmallGameSetup() throws Exception {
         Scanner sc = new Scanner("1\n1\n2\n5");
-        String output = "Welcome to the game!\r\n" +
-                "Choose game type: (1) Individual - (2) Collaborative\r\n" +
-                "Choose map type: (1) Safe - (2) Hazardous\r\n" +
-                "How many users will be playing? (2-8 Players)\r\n" +
-                "How big  will the map be? (Between 5x5 and 50x50)\r\n";
+        String output = "Welcome to the game!\n" +
+                "Choose game type: (1) Individual - (2) Collaborative\n" +
+                "Choose map type: (1) Safe - (2) Hazardous\n" +
+                "How many users will be playing? (2-8 Players)\n" +
+                "How big  will the map be? (Between 5x5 and 50x50)\n";
         l.setup(sc);
         assertEquals(output, ConsoleOut.toString());
     }
@@ -76,12 +76,12 @@ public class LauncherTest {
     @Test
     public void CollaborativeSmallGameSetup() throws Exception {
         Scanner sc = new Scanner("2\n1\n4\n5\n2");
-        String output = "Welcome to the game!\r\n" +
-                "Choose game type: (1) Individual - (2) Collaborative\r\n" +
-                "Choose map type: (1) Safe - (2) Hazardous\r\n" +
-                "How many users will be playing? (2-8 Players)\r\n" +
-                "How big  will the map be? (Between 5x5 and 50x50)\r\n"+
-                "How many teams will be playing? (2-3 Teams)\r\n";
+        String output = "Welcome to the game!\n" +
+                "Choose game type: (1) Individual - (2) Collaborative\n" +
+                "Choose map type: (1) Safe - (2) Hazardous\n" +
+                "How many users will be playing? (2-8 Players)\n" +
+                "How big  will the map be? (Between 5x5 and 50x50)\n"+
+                "How many teams will be playing? (2-3 Teams)\n";
         l.setup(sc);
         assertTrue(ConsoleOut.toString().contains(output));
 

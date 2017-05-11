@@ -13,13 +13,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Launcher {
 
     public static void main(String[] args) {
-        Game game = setup();
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        Game game = setup(sc);
         game.startGame();
-
     }
 
     public static int getIntegerInput(int min, int max, Scanner sc) {
-        boolean check = false;
+        boolean check;
         int input = min - 1;
         do {
             try {
@@ -27,17 +27,17 @@ public class Launcher {
                 if (input < min || input > max) throw new SizeException(min + " and " + max);
                 check = true;
             } catch (NumberFormatException ex) {
-                System.out.println("Incorrect input. Numbers only. Try again: ");
+                System.out.print("Incorrect input. Numbers only. Try again: ");
                 check = false;
             } catch (SizeException ex) {
-                System.out.println("The range is between " + ex.getMessage() + ". Try again: ");
+                System.out.print("The range is between " + ex.getMessage() + ". Try again: ");
                 check = false;
             }
         } while (!check);
         return input;
     }
 
-    public static Game setup() {
+    public static Game setup(Scanner sc) {
         int numPlayer;
         int mapSize;
         int mapType;
@@ -46,7 +46,6 @@ public class Launcher {
         Player[] players;
         Map map = new Map();
         Game game;
-        Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println("Welcome to the game!");
         System.out.println("Choose game type: (1) Individual - (2) Collaborative");
@@ -71,7 +70,7 @@ public class Launcher {
         map.setMapSize(mapSize, numPlayer, mapType);
 
         if (gameType == 2) {
-            int max = (int) Math.ceil(numPlayer / 2.0);
+            int max = numPlayer-1;
             System.out.println("How many teams will be playing? (2-" + max + " Teams)");
             int numTeam = getIntegerInput(2, max, sc);
             Team[] teams = new Team[numTeam];

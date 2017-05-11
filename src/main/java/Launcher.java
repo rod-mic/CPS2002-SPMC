@@ -99,6 +99,8 @@ public class Launcher {
 
                 System.out.println("Player "+randPlayer+" added to team "+teamCounter);
                 players[randPlayer] = new Player(map,currentTeam);
+                teamCounter++;
+                playerCounter++;
             }
         } else {
             for (int i = 0; i < numPlayer; i++) {

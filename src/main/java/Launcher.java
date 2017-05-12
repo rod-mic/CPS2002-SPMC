@@ -1,8 +1,8 @@
 import Exceptions.SizeException;
 import Objects.Game;
 import Objects.Map;
-import Objects.Player;
-import Objects.Team;
+import Objects.Observer.Player;
+import Objects.Observer.Team;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -101,9 +101,9 @@ public class Launcher {
                     randPlayer = ThreadLocalRandom.current().nextInt(0, numPlayer); //chooses a random player that has not yet been put in team
                     chosenPlayer = players[randPlayer];
                 } while (chosenPlayer != null);
-
+                teams[teamCounter].Attach(players[randPlayer]);
                 System.out.println("Player "+randPlayer+" added to team "+teamCounter);
-                players[randPlayer] = new Player(map,currentTeam); //creates a Player Object
+                players[randPlayer] = new Player(map); //creates a Player Object
                 teamCounter++;
                 playerCounter++;
             }

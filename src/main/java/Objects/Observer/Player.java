@@ -2,7 +2,7 @@ package Objects.Observer;
 
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
-import Objects.Map;
+import Objects.MapTypes.MapInterface;
 import Objects.Position;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class Player extends PlayerObserver{
 
     private ArrayList<Position> previousPositions = new ArrayList<>();
 
-    public Player(Map map) {
+    public Player(MapInterface map) {
         int size = map.getMapSize();
         boolean check = false;
         int row;
@@ -68,7 +68,7 @@ public class Player extends PlayerObserver{
         return true;
     }
 
-    public boolean checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException {
+    public boolean checkDirection(char direction, MapInterface map) throws InvalidPositionException, InvalidDirectionException {
         int row = position.getRow();
         int col = position.getCol();
         switch (direction) {
@@ -94,7 +94,7 @@ public class Player extends PlayerObserver{
         return true;
     }
 
-    public boolean checkPosition(Position p, Map map) {
+    public boolean checkPosition(Position p, MapInterface map) {
         int size = map.getMapSize();
         int row = p.getRow();
         int col = p.getCol();

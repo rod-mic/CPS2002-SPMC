@@ -20,6 +20,7 @@ class SubjectTeam {
     }
 
     public void Notify(){
+        System.out.println(players.size());
         for(PlayerObserver p:players){
             p.Update();
         }

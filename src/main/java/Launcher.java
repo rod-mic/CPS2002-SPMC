@@ -103,9 +103,9 @@ public class Launcher {
                     randPlayer = ThreadLocalRandom.current().nextInt(0, numPlayer); //chooses a random player that has not yet been put in team
                     chosenPlayer = players[randPlayer];
                 } while (chosenPlayer != null);
-                teams[teamCounter].Attach(players[randPlayer]);
                 System.out.println("Player "+randPlayer+" added to team "+teamCounter);
-                players[randPlayer] = new Player(map); //creates a Player Object
+                players[randPlayer] = new Player(map,currentTeam); //creates a Player Object
+                currentTeam.Attach(players[randPlayer]);
                 teamCounter++;
                 playerCounter++;
             }

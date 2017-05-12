@@ -18,12 +18,32 @@ public class Player extends PlayerObserver{
 
     private ArrayList<Position> previousPositions = new ArrayList<>();
 
+    public Player(MapInterface map,Team team) {
+        int size = map.getMapSize();
+        boolean check = false;
+        int row;
+        int col;
+        this.team = team;
+        while (!check) {
+            row = ThreadLocalRandom.current().nextInt(0, size);
+            col = ThreadLocalRandom.current().nextInt(0, size);
+            Position pos = new Position(row, col);
+            if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
+            else {
+                startPosition = pos;
+                position = pos;
+                Update(pos);
+                check = true;
+            }
+        }
+    }
+
     public Player(MapInterface map) {
         int size = map.getMapSize();
         boolean check = false;
         int row;
         int col;
-
+        this.team = new Team();
         while (!check) {
             row = ThreadLocalRandom.current().nextInt(0, size);
             col = ThreadLocalRandom.current().nextInt(0, size);

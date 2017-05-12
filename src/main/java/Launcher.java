@@ -1,8 +1,8 @@
 import Exceptions.SizeException;
 import Objects.Game;
 import Objects.Map;
-import Objects.Player;
-import Objects.Team;
+import Objects.Observer.Player;
+import Objects.Observer.Team;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,7 +20,7 @@ public class Launcher {
         game.startGame();   //Begins the game
     }
 
-    //Function for getting input from user taking a minimum and maximum input
+    //Function for getting an integer input from user taking a minimum and maximum input
     public static int getIntegerInput(int min, int max, Scanner sc) {
         boolean check;
         int input = min - 1;
@@ -40,7 +40,7 @@ public class Launcher {
         return input;
     }
 
-    //Function that requests user to input the setting for the game
+    //Function that sets up the game according to user input
     public static Game setup(Scanner sc) {
 
         //Settings variable initialisation
@@ -98,12 +98,12 @@ public class Launcher {
                 Team currentTeam = teams[teamCounter];
 
                 do {
-                    randPlayer = ThreadLocalRandom.current().nextInt(0, numPlayer); //choices a random player that has not yet been put in team
+                    randPlayer = ThreadLocalRandom.current().nextInt(0, numPlayer); //chooses a random player that has not yet been put in team
                     chosenPlayer = players[randPlayer];
                 } while (chosenPlayer != null);
-
+                teams[teamCounter].Attach(players[randPlayer]);
                 System.out.println("Player "+randPlayer+" added to team "+teamCounter);
-                players[randPlayer] = new Player(map,currentTeam); //creates a Player Object
+                players[randPlayer] = new Player(map); //creates a Player Object
                 teamCounter++;
                 playerCounter++;
             }

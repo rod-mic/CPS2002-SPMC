@@ -2,6 +2,7 @@ package Objects;
 
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
+import Objects.Observer.Player;
 
 import java.io.File;
 import java.nio.file.Files;

@@ -1,81 +1,58 @@
-package Objects;
+package Objects.Observer;
 
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
+import Objects.Map;
+import Objects.Position;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by rodemic on 07/04/2017.
+ * Created by rodemic on 12/05/2017.
  */
-public class Player {
-
+public class Player extends PlayerObserver{
     private Position position;
     private Position startPosition;
-    private Team team;
+    Team team;
 
-    public Player(Map map, Team team){
-        this.team = team;
+    private ArrayList<Position> previousPositions = new ArrayList<>();
+
+    public Player(Map map) {
         int size = map.getMapSize();
         boolean check = false;
         int row;
         int col;
 
-        while(!check) {
-            row = ThreadLocalRandom.current().nextInt(0,size);
-            col = ThreadLocalRandom.current().nextInt(0,size);
-            Position pos = new Position(row,col);
+        while (!check) {
+            row = ThreadLocalRandom.current().nextInt(0, size);
+            col = ThreadLocalRandom.current().nextInt(0, size);
+            Position pos = new Position(row, col);
             if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
-            else{
+            else {
                 startPosition = pos;
                 position = pos;
-                addPosition(pos);
+                Update(pos);
                 check = true;
             }
         }
     }
 
-    public Player(Map map){
-        this.team = new Team();
-        int size = map.getMapSize();
-        boolean check = false;
-        int row;
-        int col;
-
-        while(!check) {
-            row = ThreadLocalRandom.current().nextInt(0,size);
-            col = ThreadLocalRandom.current().nextInt(0,size);
-            Position pos = new Position(row,col);
-            if (map.getTileType(pos) != 'G' || !map.checkPath(pos)) check = false;
-            else{
-                startPosition = pos;
-                position = pos;
-                addPosition(pos);
-                check = true;
-            }
-        }
-    }
-
-    public boolean addPosition(Position p){
-        return team.addPosition(p);
-    }
-
-    public ArrayList<Position> getPreviousPositions(){
-        return team.getPreviousPositions();
+    private void Update(Position pos) {
+        team.addPosition(pos);
     }
 
     public boolean move(char direction) {
         int row = position.getRow();
         int col = position.getCol();
         Position pos = null;
-        switch(direction) {
+        switch (direction) {
             case 'U':
-                pos = new Position(row-1,col);
+                pos = new Position(row - 1, col);
                 setPosition(pos);
                 break;
             case 'D':
-                pos = new Position(row+1, col);
+                pos = new Position(row + 1, col);
                 setPosition(pos);
                 break;
             case 'L':
@@ -87,31 +64,32 @@ public class Player {
                 setPosition(pos);
                 break;
         }
-        addPosition(pos);
+        team.addPosition(pos);
         return true;
     }
 
-    public boolean checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException{
+    public boolean checkDirection(char direction, Map map) throws InvalidPositionException, InvalidDirectionException {
         int row = position.getRow();
         int col = position.getCol();
-        switch(direction) {
+        switch (direction) {
             case 'U':
-                if (!checkPosition(new Position(row-1, col),map))
+                if (!checkPosition(new Position(row - 1, col), map))
                     throw new InvalidPositionException("The player has hit the top wall");
                 break;
             case 'D':
-                if (!checkPosition(new Position(row+1, col),map))
+                if (!checkPosition(new Position(row + 1, col), map))
                     throw new InvalidPositionException("The player has hit the bottom wall");
                 break;
             case 'L':
-                if (!checkPosition(new Position(row, col-1),map))
+                if (!checkPosition(new Position(row, col - 1), map))
                     throw new InvalidPositionException("The player has hit the left wall");
                 break;
             case 'R':
-                if (!checkPosition(new Position(row, col+1),map))
+                if (!checkPosition(new Position(row, col + 1), map))
                     throw new InvalidPositionException("The player has hit the right wall");
                 break;
-            default: throw new InvalidDirectionException();
+            default:
+                throw new InvalidDirectionException();
         }
         return true;
     }
@@ -124,7 +102,7 @@ public class Player {
         return (row >= 0 && row < size && col >= 0 && col < size);
     }
 
-    public Position getStartPosition(){
+    public Position getStartPosition() {
         return startPosition;
     }
 
@@ -137,8 +115,16 @@ public class Player {
         return position;
     }
 
-    public boolean setPosition(Position p){
+    public boolean setPosition(Position p) {
         position = p;
         return true;
+    }
+
+    public void Update(){
+        previousPositions = team.getPreviousPositions();
+    }
+
+    public ArrayList<Position> getPreviousPositions() {
+        return previousPositions;
     }
 }

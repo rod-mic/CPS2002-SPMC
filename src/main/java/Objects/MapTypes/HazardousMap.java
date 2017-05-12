@@ -1,23 +1,24 @@
-package Objects;
+package Objects.MapTypes;
+
+import Objects.Position;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by thoma on 12/05/2017.
  */
-public class SafeMap extends Map{
-    private static SafeMap ourInstance = new SafeMap();
+public class HazardousMap extends Map{
+    private static HazardousMap ourInstance = new HazardousMap();
 
-    public static SafeMap getInstance() {
+    public static HazardousMap getInstance() {
         return ourInstance;
     }
 
-    private SafeMap() {
-        generate();
-    }
+    private HazardousMap() {}
 
     public boolean generate(){
         //Setting Treasure Tile
+        initMap(size);
         int xrand = ThreadLocalRandom.current().nextInt(0, size);
         int yrand = ThreadLocalRandom.current().nextInt(0, size);
         map[xrand][yrand] = 'T';
@@ -31,8 +32,8 @@ public class SafeMap extends Map{
         }
 
         //Setting Water Tiles
-        int minWaterTiles = (size * size * 0)/100;
-        int maxWaterTiles = (size * size * 10)/100;
+        int minWaterTiles = (size * size * 25)/100;
+        int maxWaterTiles = (size * size * 35)/100;
         int currentWaterTiles = 0;
         for(int i = 0; i < maxWaterTiles; i++){
             if(currentWaterTiles < minWaterTiles) {
@@ -54,7 +55,6 @@ public class SafeMap extends Map{
                 }
             }
         }
-
 
         return true;
     }

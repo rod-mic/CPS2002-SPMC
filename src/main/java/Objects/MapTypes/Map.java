@@ -1,9 +1,8 @@
-package Objects;
+package Objects.MapTypes;
 
+import Objects.Position;
 import Path.Algorithm.BreathFirst;
 import Path.DataObjects.Graph;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by rodemic on 07/04/2017.
@@ -12,34 +11,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Map implements MapInterface{
 
     protected int size;
+    protected int numOfPlayers;
     protected char[][] map;
     protected Position treasurePos;
 
     public Map(){}
 
-    public boolean setMapSize(int s, int player){
-        if(player >= 2 && player <= 4 && s >= 5){
-            size = s;
-            map = new char[size][size];
-            initMap(size);
-            boolean check = true;
-            while(check){
-                if(checkAnyPaths(player)) check = false;
-            }
-            return true;
-        }
-        else if(player >= 5 && player <= 8 && s >= 8){
-            size = s;
-            map = new char[size][size];
-            initMap(size);
-            boolean check = true;
-            while(check){
-                if(checkAnyPaths(player)) check = false;
-            }
-            return true;
-        }
-        else return false;
-    }
+    public void setMapSize(int size){ this.size = size; }
+
+    public void setNumOfPlayers(int numOfPlayers){ this.numOfPlayers = numOfPlayers; }
 
     public boolean generate(){
         return true;
@@ -52,6 +32,7 @@ public class Map implements MapInterface{
     public char getTileType(Position position){ return map[position.getRow()][position.getCol()];}
 
     public boolean initMap(int size){
+        map = new char[size][size];
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 map[i][j] = ' ';

@@ -4,7 +4,7 @@ package Path.DataObjects;
  * Created by thoma on 07/04/2017.
  */
 
-import Objects.Map;
+import Objects.MapTypes.*;
 import Objects.Position;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class Graph {
     private Node rootNode;
     final private Node goal;
 
-    public Graph(Map m, Position position, Position treasure) {
+    public Graph(MapInterface m, Position position, Position treasure) {
         this.map = m.getMap();
         listOfNodes = new ArrayList<>();
         for(int i = 0; i < map.length; i++){

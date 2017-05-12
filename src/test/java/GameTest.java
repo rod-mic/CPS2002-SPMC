@@ -1,6 +1,6 @@
 import Objects.Game;
-import Objects.Map;
-import Objects.Player;
+import Objects.MapTypes.Map;
+import Objects.Observer.Player;
 import Objects.Position;
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,7 +29,7 @@ public class GameTest {
     @Before
     public void setup() throws Exception {
         m = new Map();
-        m.setMapSize(5, 2,1);
+        //m.setMapSize(5, 2);
         p[0] = new Player(m);
         p[1] = new Player(m);
         g = new Game(p, m);

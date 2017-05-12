@@ -1,4 +1,4 @@
-import Objects.Map;
+import Objects.MapTypes.Map;
 import Objects.Position;
 import Path.Algorithm.BreathFirst;
 import Path.DataObjects.Graph;
@@ -20,7 +20,7 @@ public class BreathFirstTest {
 
     @org.junit.Before
     public void Before() {
-        m.setMapSize(5, 2,1);
+        //m.setMapSize(5, 2);
         g = new Graph(m, new Position(0, 1), m.getTreasurePos());
         b = new BreathFirst(g);
     }

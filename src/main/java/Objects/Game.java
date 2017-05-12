@@ -2,6 +2,8 @@ package Objects;
 
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
+import Objects.MapTypes.Map;
+import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;
 
 import java.io.File;
@@ -19,10 +21,10 @@ import static java.lang.System.exit;
 public class Game {
     private int turn;
     final private Player[] players;
-    final private Map map;
+    final private MapInterface map;
     final private Scanner sc = new Scanner(System.in);
 
-    public Game(Player[] players, Map map){
+    public Game(Player[] players, MapInterface map){
         turn = 0;
         this.players = players;
         this.map = map;

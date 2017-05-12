@@ -1,6 +1,7 @@
 import Exceptions.SizeException;
 import Objects.Game;
-import Objects.Map;
+import Objects.MapTypes.MapCreator;
+import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;
 import Objects.Observer.Team;
 
@@ -50,7 +51,7 @@ public class Launcher {
         int gameType;
 
         Player[] players;
-        Map map = new Map(); //creates Map Object
+        MapInterface map;
         Game game;
 
         System.out.println("Welcome to the game!");
@@ -67,13 +68,14 @@ public class Launcher {
         numPlayer = getIntegerInput(2, 8, sc);
         players = new Player[numPlayer];
         if (numPlayer < 5) {
-            System.out.println("How big  will the map be? (Between 5x5 and 50x50)"); //Choice for map size
+            System.out.println("How big  will the map be? (Between 5x5 and 50x50)"); //Choice for map size when players less than 5
             mapSize = getIntegerInput(5, 50, sc);
         } else {
-            System.out.println("How big  will the map be? (Between 8x8 and 50x50)");
+            System.out.println("How big  will the map be? (Between 8x8 and 50x50)"); //Choice for map size when players 5 or more
             mapSize = getIntegerInput(8, 50, sc);
         }
-        map.setMapSize(mapSize, numPlayer, mapType); //generates the map according to the specifications given
+        MapCreator mc = new MapCreator();
+        map = mc.createMap(mapSize,numPlayer,mapType);
 
         if (gameType == 2) { //Section of code for setting up teams
             int max = numPlayer-1;

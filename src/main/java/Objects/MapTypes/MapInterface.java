@@ -1,10 +1,11 @@
-package Objects;
+package Objects.MapTypes;
+
+import Objects.Position;
 
 /**
  * Created by thoma on 12/05/2017.
  */
 public interface MapInterface {
-    boolean setMapSize(int s, int player);
     boolean generate();
     int getMapSize();
     Position getTreasurePos();

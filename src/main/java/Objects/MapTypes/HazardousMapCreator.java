@@ -1,7 +1,6 @@
 package Objects.MapTypes;
 
 import Exceptions.*;
-import com.sun.glass.ui.Size;
 
 /**
  * Created by thoma on 12/05/2017.

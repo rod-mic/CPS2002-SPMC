@@ -2,11 +2,9 @@ package Objects.MapTypes;
 
 import Exceptions.PlayerException;
 import Exceptions.SizeException;
-import Objects.Observer.Player;
 import Objects.Position;
 import Path.Algorithm.BreathFirst;
 import Path.DataObjects.Graph;
-import com.sun.glass.ui.Size;
 
 /**
  * Created by rodemic on 07/04/2017.

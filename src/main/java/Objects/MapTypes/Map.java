@@ -1,8 +1,12 @@
 package Objects.MapTypes;
 
+import Exceptions.PlayerException;
+import Exceptions.SizeException;
+import Objects.Observer.Player;
 import Objects.Position;
 import Path.Algorithm.BreathFirst;
 import Path.DataObjects.Graph;
+import com.sun.glass.ui.Size;
 
 /**
  * Created by rodemic on 07/04/2017.
@@ -17,9 +21,21 @@ public class Map implements MapInterface{
 
     public Map(){}
 
-    public void setMapSize(int size){ this.size = size; }
+    public void setMapProps(int size, int numOfPlayers) throws PlayerException, SizeException{
+        if(numOfPlayers < 2) throw new PlayerException("Invalid amount of players");
+        else if(numOfPlayers > 8) throw new PlayerException("Invalid amount of players");
+        this.numOfPlayers = numOfPlayers;
 
-    public void setNumOfPlayers(int numOfPlayers){ this.numOfPlayers = numOfPlayers; }
+        if(numOfPlayers < 5){
+            if(size < 5) throw new SizeException("Invalid size");
+            else if(size > 50) throw new SizeException("Invalid size");
+        }
+        else if(numOfPlayers > 4){
+            if(size < 8) throw new SizeException("Invalid size");
+            else if(size > 50) throw new SizeException("Invalid size");
+        }
+        this.size = size;
+    }
 
     public boolean generate(){
         return true;

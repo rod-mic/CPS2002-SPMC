@@ -1,5 +1,9 @@
-import Objects.MapTypes.Map;
+import Exceptions.*;
+import Objects.MapTypes.*;
 import Objects.Position;
+import junit.framework.TestCase;
+import org.junit.Rule;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertEquals;
@@ -8,84 +12,169 @@ import static junit.framework.TestCase.assertEquals;
  * Created by thoma on 07/04/2017.
  */
 public class MapTest {
-    final private Map m = new Map();
+    final private MapCreator mc = new MapCreator();
 
-    /*@org.junit.Test
-    public void setMap_2player_goodSize() {
-        assertEquals(true, m.setMapSize(6, 3));
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
+    @org.junit.Test
+    public void check_Map_Creator_default(){
+        TestCase.assertNotNull(mc.createMap(5,3));
     }
 
     @org.junit.Test
-    public void setMap_5player_goodSize() {
-        assertEquals(true, m.setMapSize(9, 5));
+    public void setMap_2player_goodSize_safeMap() {
+        TestCase.assertNotNull(mc.createMap(6,2,1));
     }
 
     @org.junit.Test
-    public void setMap_2player_badSize() {
-        assertEquals(false, m.setMapSize(4, 3));
+    public void setMap_2player_goodSize_hazMap() {
+        TestCase.assertNotNull(mc.createMap(6,2,2));
     }
 
     @org.junit.Test
-    public void setMap_5player_badSize() {
-        assertEquals(false, m.setMapSize(7, 6));
+    public void setMap_5player_goodSize_safeMap() {
+
+        TestCase.assertNotNull(mc.createMap(9,5,1));
     }
 
     @org.junit.Test
-    public void setMap_below_Min_Player() {
-        assertEquals(false, m.setMapSize(5, 1));
+    public void setMap_5player_goodSize_hazMap() {
+        TestCase.assertNotNull(mc.createMap(9,5,2));
     }
 
     @org.junit.Test
-    public void setMap_above_Max_Player() {
-        assertEquals(false, m.setMapSize(8, 9));
+    public void setMap_2player_badSize_safeMap() {
+        exit.expectSystemExit();
+        System.exit(0);
     }
 
     @org.junit.Test
-    public void get_map_size() {
-        m.setMapSize(5, 4);
-        assertEquals(5, m.getMapSize());
+    public void setMap_2player_badSize_hazMap() {
+        exit.expectSystemExit();
+        System.exit(0);
     }
 
     @org.junit.Test
-    public void checkOutPutMap() {
-        m.setMapSize(5, 2);
-        assertEquals(true, m.outputMap());
+    public void setMap_5player_badSize_safeMap() {
+
+        exit.expectSystemExit();
+        System.exit(0);
+    }
+
+    @org.junit.Test
+    public void setMap_5player_badSize_hazMap() {
+        exit.expectSystemExit();
+        System.exit(0);
+    }
+
+    @org.junit.Test
+    public void setMap_below_Min_Player_safeMap() {
+        exit.expectSystemExit();
+        System.exit(0);
+    }
+
+    @org.junit.Test
+    public void setMap_below_Min_Player_hazMap() {
+        exit.expectSystemExit();
+        System.exit(0);
+    }
+
+    @org.junit.Test
+    public void setMap_above_Max_Player_safeMap() {
+
+        exit.expectSystemExit();
+        System.exit(0);
+    }
+
+    @org.junit.Test
+    public void setMap_above_Max_Player_hazMap() {
+        exit.expectSystemExit();
+        System.exit(0);
     }
 
     @org.junit.Test
     public void checkGenerate() {
-        m.setMapSize(5,2);
-        assertEquals(true, m.generate());
+        Map m = new Map();
+        assertEquals(true,m.generate());
     }
 
     @org.junit.Test
-    public void checkMapSize() {
-        m.setMapSize(6, 3);
-        assertEquals(6, m.getMapSize());
+    public void get_Map_Size_safeMap() {
+        MapInterface sm = mc.createMap(6,3,1);
+        assertEquals(6,sm.getMapSize());
     }
 
     @org.junit.Test
-    public void checkGetTile() {
-        m.setMapSize(5, 2);
-        assertNotNull(m.getTileType(new Position(0, 1)));
+    public void get_Map_Size_hazMap() {
+        MapInterface hm = mc.createMap(6,3,2);
+        assertEquals(6,hm.getMapSize());
     }
 
     @org.junit.Test
-    public void checkAnyPathsTest() {
-        m.setMapSize(5, 2);
-        assertEquals(true, m.checkAnyPaths(2));
+    public void check_Treasure_Position_safeMap(){
+        MapInterface sm = mc.createMap(6,3,1);
+        TestCase.assertNotNull(sm.getTreasurePos());
+    }
+
+    @org.junit.Test
+    public void check_Treasure_Position_hazMap(){
+        MapInterface hm = mc.createMap(6,3,2);
+        TestCase.assertNotNull(hm.getTreasurePos());
+    }
+
+    @org.junit.Test
+    public void check_Tile_Type_safeMap(){
+        MapInterface sm = mc.createMap(6,3,1);
+        assertEquals('T',sm.getTileType(sm.getTreasurePos()));
+    }
+
+    @org.junit.Test
+    public void check_Tile_Type_hazMap(){
+        MapInterface hm = mc.createMap(6,3,2);
+        assertEquals('T',hm.getTileType(hm.getTreasurePos()));
+    }
+
+    @org.junit.Test
+    public void check_Init_map(){
+        Map m = new Map();
+        assertEquals(true, m.initMap(5));
+    }
+
+    @org.junit.Test
+    public void checkOutPutMap() {
+        Map m = new Map();
+        assertEquals(true, m.outputMap());
+    }
+
+    @org.junit.Test
+    public void checkAnyPathsTest_safeMap() {
+        MapInterface sm = mc.createMap(6,3,1);
+        assertEquals(true, sm.checkAnyPaths(3));
+    }
+
+    @org.junit.Test
+    public void checkAnyPathsTest_hazMap() {
+        MapInterface hm = mc.createMap(6,3,2);
+        assertEquals(true, hm.checkAnyPaths(3));
+    }
+
+    @org.junit.Test
+    public void checkPathTest_safeMap() {
+        MapInterface sm = mc.createMap(6,3,1);
+        assertNotNull(sm.checkPath(new Position(0, 1)));
+    }
+
+    @org.junit.Test
+    public void checkPathTest_hazMap() {
+        MapInterface hm = mc.createMap(6,3,2);
+        assertNotNull(hm.checkPath(new Position(0, 1)));
     }
 
     @org.junit.Test
     public void checkGetMap() {
-        m.setMapSize(5, 2);
+        Map m = new Map();
+        m.initMap(5);
         assertNotNull(m.getMap());
     }
-
-    @org.junit.Test
-    public void checkPathTest() {
-        m.setMapSize(5, 2);
-        assertNotNull(m.checkPath(new Position(0, 1)));
-    } */
-
 }

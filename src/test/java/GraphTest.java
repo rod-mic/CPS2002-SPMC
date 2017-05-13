@@ -1,7 +1,6 @@
-import Objects.MapTypes.Map;
+import Objects.MapTypes.*;
 import Objects.Position;
-import Path.DataObjects.Graph;
-import Path.DataObjects.Node;
+import Path.DataObjects.*;
 
 import java.util.Vector;
 
@@ -13,12 +12,12 @@ import static org.junit.Assert.assertNotNull;
  */
 public class GraphTest {
 
-    Map m = new Map();
+    MapCreator mc = new MapCreator();
+    MapInterface m = mc.createMap(7,3);
     Graph g;
 
     @org.junit.Before
     public void Before() {
-        //m.setMapSize(5, 2);
         g = new Graph(m, new Position(0, 1), m.getTreasurePos());
     }
 

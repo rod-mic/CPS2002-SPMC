@@ -1,5 +1,7 @@
 import Objects.Game;
 import Objects.MapTypes.Map;
+import Objects.MapTypes.MapCreator;
+import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;
 import Objects.Position;
 import org.junit.Before;
@@ -8,7 +10,10 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
@@ -17,19 +22,18 @@ import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emp
  * Created by rodemic on 17/04/2017.
  */
 public class GameTest {
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
-    @Rule
-    public final TextFromStandardInputStream systemInMock
-            = emptyStandardInputStream();
+    private final ByteArrayOutputStream ConsoleOut = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream ConsoleErr = new ByteArrayOutputStream();
     Game g;
     Player[] p = new Player[2];
-    Map m;
+    MapInterface m;
 
     @Before
     public void setup() throws Exception {
-        m = new Map();
-        //m.setMapSize(5, 2);
+        System.setOut(new PrintStream(ConsoleOut));
+        System.setErr(new PrintStream(ConsoleErr));
+        MapCreator mc = new MapCreator();
+        m = mc.createMap(5,2,1);
         p[0] = new Player(m);
         p[1] = new Player(m);
         g = new Game(p, m);
@@ -62,7 +66,7 @@ public class GameTest {
         winners.add(1);
         String output = "Player 1 found the Treasure!";
         g.printWinners(winners);
-        assertEquals(output, systemOutRule.getLog().trim());
+        assertEquals(output, ConsoleOut.toString().trim());
     }
 
     @Test
@@ -73,40 +77,40 @@ public class GameTest {
         winners.add(3);
         String output = "Players 1 2 3 found the Treasure!";
         g.printWinners(winners);
-        assertEquals(output, systemOutRule.getLog().trim());
+        assertEquals(output, ConsoleOut.toString().trim());
     }
 
     @Test
     public void InvalidDirectionUserInput() throws Exception {
-        systemInMock.provideLines("F", "U");
+        Scanner sc = new Scanner("F\nU");
         String output = "F is invalid. Please enter (U)p, (D)own, (L)eft or (R)ight. Direction:";
         Position pos = new Position(2, 2);
         Player pl = new Player(m);
         pl.setPosition(pos);
-        g.getUserDirection(pl);
-        assertEquals(output, systemOutRule.getLog().trim());
+        g.getUserDirection(pl,sc);
+        assertEquals(output, ConsoleOut.toString());
     }
 
     @Test
     public void InvalidPositionUserInput() throws Exception {
-        systemInMock.provideLines("U", "D");
-        String output = "The player has hit the top wall. Direction:";
+        Scanner sc = new Scanner("U\nD");
+        String output = "The player has hit the top wall. Direction: ";
         Position pos = new Position(0, 0);
         Player pl = new Player(m);
         pl.setPosition(pos);
-        g.getUserDirection(pl);
-        assertEquals(output, systemOutRule.getLog().trim());
+        g.getUserDirection(pl,sc);
+        assertEquals(output, ConsoleOut.toString());
     }
 
     @Test
     public void CorrectUserInput() throws Exception {
-        systemInMock.provideLines("D");
+        Scanner sc = new Scanner("D");
         String output = "";
         Position pos = new Position(0, 0);
         Player pl = new Player(m);
         pl.setPosition(pos);
-        g.getUserDirection(pl);
-        assertEquals(output, systemOutRule.getLog().trim());
+        g.getUserDirection(pl,sc);
+        assertEquals(output, ConsoleOut.toString());
     }
 
     @Test

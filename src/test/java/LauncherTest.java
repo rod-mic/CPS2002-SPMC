@@ -68,9 +68,9 @@ public class LauncherTest {
                 "Choose game type: (1) Individual - (2) Collaborative\n" +
                 "Choose map type: (1) Safe - (2) Hazardous\n" +
                 "How many users will be playing? (2-8 Players)\n" +
-                "How big  will the map be? (Between 5x5 and 50x50)\n";
+                "How big  will the map be? (Between 5x5 and 50x50)";
         l.setup(sc);
-        assertEquals(output, ConsoleOut.toString());
+        assertEquals(output, ConsoleOut.toString().trim());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LauncherTest {
                 "Choose map type: (1) Safe - (2) Hazardous\n" +
                 "How many users will be playing? (2-8 Players)\n" +
                 "How big  will the map be? (Between 5x5 and 50x50)\n"+
-                "How many teams will be playing? (2-3 Teams)\n";
+                "How many teams will be playing? (2-3 Teams)";
         l.setup(sc);
         assertTrue(ConsoleOut.toString().contains(output));
 

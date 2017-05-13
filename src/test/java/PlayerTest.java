@@ -1,6 +1,8 @@
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
 import Objects.MapTypes.Map;
+import Objects.MapTypes.MapCreator;
+import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;
 import Objects.Position;
 
@@ -11,13 +13,14 @@ import static org.junit.Assert.*;
  */
 public class PlayerTest {
 
-    Map m = new Map();
+    MapInterface m;
     Player p;
 
     @org.junit.Before
     public void Before() {
-        //m.setMapSize(6, 2);
-        //p = new Player(m);
+        MapCreator mc = new MapCreator();
+        m = mc.createMap(6,2,1);
+        p = new Player(m);
     }
 
     /*@org.junit.Test

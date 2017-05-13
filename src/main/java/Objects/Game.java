@@ -22,7 +22,6 @@ public class Game {
     private int turn;
     final private Player[] players;
     final private MapInterface map;
-    final private Scanner sc = new Scanner(System.in);
 
     public Game(Player[] players, MapInterface map){
         turn = 0;
@@ -75,7 +74,7 @@ public class Game {
         }
     }
 
-    public char getUserDirection(Player p){
+    public char getUserDirection(Player p, Scanner sc){
         char direction;
         boolean check;
 
@@ -100,6 +99,7 @@ public class Game {
     }
 
     public void startGame(){
+        Scanner sc = new Scanner(System.in);
         boolean checkWin = false;
         char[] direction = new char[players.length];
         ArrayList<Integer> winners = new ArrayList<>();
@@ -108,7 +108,7 @@ public class Game {
             System.out.println("Turn "+turn);
             for (int i = 0; i < players.length; i++) {
                 System.out.print("Direction to move Player " + i + ": ");
-                direction[i] = getUserDirection(players[i]);
+                direction[i] = getUserDirection(players[i],sc);
             }
 
             movePlayers(direction);

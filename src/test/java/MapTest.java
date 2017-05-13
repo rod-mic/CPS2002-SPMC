@@ -1,5 +1,6 @@
-import Exceptions.*;
-import Objects.MapTypes.*;
+import Objects.MapTypes.Map;
+import Objects.MapTypes.MapCreator;
+import Objects.MapTypes.MapInterface;
 import Objects.Position;
 import junit.framework.TestCase;
 import org.junit.Rule;

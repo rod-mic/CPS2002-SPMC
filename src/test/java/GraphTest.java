@@ -1,6 +1,8 @@
-import Objects.MapTypes.*;
+import Objects.MapTypes.MapCreator;
+import Objects.MapTypes.MapInterface;
 import Objects.Position;
-import Path.DataObjects.*;
+import Path.DataObjects.Graph;
+import Path.DataObjects.Node;
 
 import java.util.Vector;
 

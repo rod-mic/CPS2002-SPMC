@@ -1,8 +1,5 @@
 package Objects.Observer;
 
-import Objects.Observer.Player;
-import Objects.Observer.PlayerObserver;
-
 import java.util.ArrayList;
 
 /**

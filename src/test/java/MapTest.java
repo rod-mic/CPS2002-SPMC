@@ -1,3 +1,5 @@
+import Exceptions.PlayerException;
+import Exceptions.SizeException;
 import Objects.MapTypes.*;
 import Objects.Position;
 import junit.framework.TestCase;
@@ -141,6 +143,16 @@ public class MapTest {
     @org.junit.Test
     public void checkOutPutMap() {
         Map m = new Map();
+        try{
+            m.setMapProps(7,3);
+            m.initMap(7);
+        }catch(PlayerException e){
+            System.out.println(e.errorMessage);
+            System.exit(0);
+        }catch(SizeException e){
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
         assertEquals(true, m.outputMap());
     }
 

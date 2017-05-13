@@ -6,13 +6,14 @@ package Objects.MapTypes;
 public class MapCreator {
 
     public MapInterface createMap(int mapSize, int numOfPlayers, int choice){
-        switch(choice){
-            case 1: SafeMapCreator creator = new SafeMapCreator();
-                    return creator.create(mapSize, numOfPlayers);
-            case 2: HazardousMapCreator creator2 = new HazardousMapCreator();
-                    return creator2.create(mapSize, numOfPlayers);
+        if(choice == 1){
+            SafeMapCreator creator = new SafeMapCreator();
+            return creator.create(mapSize, numOfPlayers);
         }
-        return null;
+        else{
+            HazardousMapCreator creator2 = new HazardousMapCreator();
+            return creator2.create(mapSize, numOfPlayers);
+        }
     }
 
     public MapInterface createMap(int mapSize, int numOfPlayers){

@@ -36,23 +36,13 @@ public class SafeMap extends Map{
         int maxWaterTiles = (size * size * 10)/100;
         int currentWaterTiles = 0;
         for(int i = 0; i < maxWaterTiles; i++){
-            if(currentWaterTiles < minWaterTiles) {
+            int randomValue = ThreadLocalRandom.current().nextInt(0,2);
+            if(randomValue == 1){
                 do{
                     xrand = ThreadLocalRandom.current().nextInt(0, size);
                     yrand = ThreadLocalRandom.current().nextInt(0, size);
-                }while(map[xrand][yrand] != 'G');
+                } while(map[xrand][yrand] != 'G');
                 map[xrand][yrand] = 'W';
-                currentWaterTiles++;
-            }
-            else{
-                int randomValue = ThreadLocalRandom.current().nextInt(0,2);
-                if(randomValue == 1){
-                    do{
-                        xrand = ThreadLocalRandom.current().nextInt(0, size);
-                        yrand = ThreadLocalRandom.current().nextInt(0, size);
-                    } while(map[xrand][yrand] != 'G');
-                    map[xrand][yrand] = 'W';
-                }
             }
         }
 

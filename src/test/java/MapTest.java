@@ -46,56 +46,48 @@ public class MapTest {
     public void setMap_2player_badSize_safeMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(4,2,1);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_2player_badSize_hazMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(4,2,2);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_5player_badSize_safeMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(7,5,1);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_5player_badSize_hazMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(7,5,2);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_below_Min_Player_safeMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(5,1,1);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_below_Min_Player_hazMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(5,1,2);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_above_Max_Player_safeMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(9,9,1);
-        System.exit(0);
     }
 
     @org.junit.Test
     public void setMap_above_Max_Player_hazMap() {
         exit.expectSystemExit();
         MapInterface m = mc.createMap(9,9,2);
-        System.exit(0);
     }
 
     @org.junit.Test

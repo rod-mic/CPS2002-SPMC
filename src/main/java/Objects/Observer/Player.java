@@ -44,7 +44,6 @@ public class Player extends PlayerObserver{
         boolean check = false;
         int row;
         int col;
-        this.team = new Team();
         while (!check) {
             row = ThreadLocalRandom.current().nextInt(0, size);
             col = ThreadLocalRandom.current().nextInt(0, size);
@@ -53,14 +52,13 @@ public class Player extends PlayerObserver{
             else {
                 startPosition = pos;
                 position = pos;
-                Update(pos);
                 check = true;
             }
         }
     }
 
     private void Update(Position pos) {
-        team.addPosition(pos);
+        if(team!= null)team.addPosition(pos);
     }
 
     public boolean move(char direction) {
@@ -85,8 +83,16 @@ public class Player extends PlayerObserver{
                 setPosition(pos);
                 break;
         }
-        team.addPosition(pos);
+        addPosition(pos);
         return true;
+    }
+
+    public void addPosition(Position pos){
+        if(team != null){
+            Update(pos);
+        }else{
+            previousPositions.add(pos);
+        }
     }
 
     public boolean checkDirection(char direction, MapInterface map) throws InvalidPositionException, InvalidDirectionException {

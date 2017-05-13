@@ -119,7 +119,7 @@ public class Game {
                     winners.add(i);
                 }if(checkWater(p)){
                     System.out.println("Player "+i+" landed on a water tile. Going to starting position");
-                    players[i].moveToStart();break;
+                    players[i].moveToStart();
                 }
             }
             generateHTMLFiles();

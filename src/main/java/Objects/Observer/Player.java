@@ -33,6 +33,7 @@ public class Player extends PlayerObserver{
                 startPosition = pos;
                 position = pos;
                 Update(pos);
+                Update();
                 check = true;
             }
         }

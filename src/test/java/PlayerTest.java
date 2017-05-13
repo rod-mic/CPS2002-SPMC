@@ -1,6 +1,5 @@
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
-import Objects.MapTypes.Map;
 import Objects.MapTypes.MapCreator;
 import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;

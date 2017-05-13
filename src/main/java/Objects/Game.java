@@ -2,7 +2,6 @@ package Objects;
 
 import Exceptions.InvalidDirectionException;
 import Exceptions.InvalidPositionException;
-import Objects.MapTypes.Map;
 import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;
 

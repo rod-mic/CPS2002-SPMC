@@ -4,7 +4,7 @@ package Path.DataObjects;
  * Created by thoma on 07/04/2017.
  */
 
-import Objects.MapTypes.*;
+import Objects.MapTypes.MapInterface;
 import Objects.Position;
 
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package Objects.MapTypes;
 
-import Exceptions.*;
+import Exceptions.PlayerException;
+import Exceptions.SizeException;
 
 /**
  * Created by thoma on 12/05/2017.

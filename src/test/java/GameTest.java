@@ -1,14 +1,10 @@
 import Objects.Game;
-import Objects.MapTypes.Map;
 import Objects.MapTypes.MapCreator;
 import Objects.MapTypes.MapInterface;
 import Objects.Observer.Player;
 import Objects.Position;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.SystemOutRule;
-import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 /**
  * Created by rodemic on 17/04/2017.

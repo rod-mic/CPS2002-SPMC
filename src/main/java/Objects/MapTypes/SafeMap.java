@@ -1,6 +1,7 @@
 package Objects.MapTypes;
 
 import Objects.Position;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
